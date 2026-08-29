@@ -54,6 +54,20 @@
     }
 
     /* ==========================================================================
+       CANVAS D'ARRIÈRE-PLAN (SÉCURISÉ & HAUTE PERFORMANCE)
+       ========================================================================== */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* ==========================================================================
        GESTION MULTILINGUE VIA CSS & DATA-LANG
        ========================================================================== */
     html[lang="fr"] [data-lang="en"] {
@@ -64,7 +78,7 @@
       display: none !important;
     }
 
-    /* Inline text switches */
+    /* Éléments inline */
     span[data-lang], strong[data-lang], a[data-lang], em[data-lang] {
       display: inline;
     }
@@ -131,20 +145,6 @@
 
     a:hover {
       color: var(--color-primary-hover);
-    }
-
-    /* ==========================================================================
-       ARRIÈRE-PLAN ANIMÉ EN FILIGRANE (CANVAS STATISTIQUE / R)
-       ========================================================================== */
-    #bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      pointer-events: none;
-      display: block;
     }
 
     /* ==========================================================================
@@ -251,7 +251,7 @@
     }
 
     /* ==========================================================================
-       SYSTÈME D'ONGLETS ÉPURÉ (STYLE ACADÉMIQUE / QUARTO)
+       SYSTÈME D'ONGLETS ÉPURÉ
        ========================================================================== */
     nav.tab-nav {
       display: flex;
@@ -369,14 +369,14 @@
     }
 
     /* ==========================================================================
-       BLOCS DE CODE & BOUTON DE COPIE (ACADÉMIQUE / QUARTO)
+       BLOCS DE CODE & BOUTON DE COPIE
        ========================================================================== */
     .code-block-container {
       position: relative;
       margin: 1rem 0 1.25rem 0;
       border: 1px solid var(--border-color);
       border-radius: 4px;
-      background-color: rgba(244, 244, 246, 0.90);
+      background-color: rgba(244, 244, 246, 0.92);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
     }
@@ -387,7 +387,7 @@
       align-items: center;
       padding: 0.4rem 0.85rem;
       border-bottom: 1px solid var(--border-light);
-      background-color: rgba(237, 237, 241, 0.90);
+      background-color: rgba(237, 237, 241, 0.92);
       font-size: 0.78rem;
       font-family: var(--font-mono);
       color: var(--text-muted);
@@ -444,7 +444,7 @@
     }
 
     /* ==========================================================================
-       GRILLES & CARTES ÉPURÉES (SANS OMBRE, BORDURE SUBTILE)
+       GRILLES & CARTES ÉPURÉES
        ========================================================================== */
     .feature-grid {
       display: grid;
@@ -457,7 +457,7 @@
       border: 1px solid var(--border-color);
       border-radius: 4px;
       padding: 1.25rem;
-      background-color: rgba(255, 255, 255, 0.88);
+      background-color: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
     }
@@ -477,7 +477,7 @@
     }
 
     /* ==========================================================================
-       CARTES DE CAS PRATIQUES (SECTION FORMATION)
+       CARTES DE CAS PRATIQUES
        ========================================================================== */
     .cases-container {
       display: flex;
@@ -490,7 +490,7 @@
       border: 1px solid var(--border-color);
       border-radius: 4px;
       padding: 1.5rem;
-      background-color: rgba(255, 255, 255, 0.88);
+      background-color: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
     }
@@ -533,7 +533,7 @@
       margin-bottom: 1.25rem;
     }
 
-    /* CONTENEUR VIDÉO RESPONSIVE LÉGER */
+    /* CONTENEUR VIDÉO RESPONSIVE */
     .video-container {
       margin: 1.25rem 0;
       border: 1px solid var(--border-color);
@@ -584,7 +584,7 @@
 
     .video-actions-bar {
       padding: 0.5rem 0.85rem;
-      background-color: rgba(255, 255, 255, 0.90);
+      background-color: rgba(255, 255, 255, 0.92);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -598,7 +598,7 @@
     .data-download-bar {
       margin: 1rem 0;
       padding: 0.75rem 1rem;
-      background-color: rgba(250, 250, 250, 0.88);
+      background-color: rgba(250, 250, 250, 0.90);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       border: 1px solid var(--border-color);
@@ -638,7 +638,7 @@
     }
 
     /* ==========================================================================
-       LISTES ET SÉQUENCES NUMÉROTÉES (GUIDE D'UTILISATION)
+       LISTES ET SÉQUENCES NUMÉROTÉES
        ========================================================================== */
     .step-section {
       margin-bottom: 2rem;
@@ -664,12 +664,12 @@
     }
 
     /* ==========================================================================
-       SECTION À PROPOS & TABLEAU D'INFORMATIONS
+       SECTION À PROPOS
        ========================================================================== */
     .author-info-box {
       border: 1px solid var(--border-color);
       border-radius: 4px;
-      background-color: rgba(255, 255, 255, 0.88);
+      background-color: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       padding: 1.25rem 1.5rem;
@@ -706,7 +706,7 @@
       color: var(--text-muted);
       margin-top: 1.25rem;
       padding: 0.85rem 1rem;
-      background-color: rgba(244, 244, 246, 0.90);
+      background-color: rgba(244, 244, 246, 0.92);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       border-left: 3px solid var(--color-primary);
@@ -772,7 +772,7 @@
        PRINT STYLES
        ========================================================================== */
     @media print {
-      header.site-header, .btn-group, .copy-btn, nav.tab-nav, .video-container, .lang-switcher {
+      #bg-canvas, header.site-header, .btn-group, .copy-btn, nav.tab-nav, .video-container, .lang-switcher {
         display: none !important;
       }
       .tab-panel {
@@ -788,7 +788,7 @@
 </head>
 <body>
 
-  <!-- ARRIÈRE-PLAN ANIMÉ EN FILIGRANE (CANVAS FIXÉ PLEIN ÉCRAN) -->
+  <!-- ARRIÈRE-PLAN ANIMÉ EN FILIGRANE -->
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
   <!-- HEADER INSTITUTIONNEL -->
@@ -1330,7 +1330,7 @@ enquete_demo_recoded &lt;- enquete_demo %&gt;%
           <article class="case-card" id="case-3-card">
             <div class="case-card-header">
               <h3 id="case-3-title">
-                <span data-lang="fr">CAS 3 : Jointure de deux tables de données</span>
+                <span data-lang="fr">CAS 3 : Jointure de deux tables de données (Left Join)</span>
                 <span data-lang="en">CASE 3: Joining two datasets (Left Join)</span>
               </h3>
               <span class="topic-badge" id="case-3-badge">
@@ -1436,12 +1436,12 @@ donnees_consolidees &lt;- ventes %&gt;%
               </h3>
               <span class="topic-badge" id="case-4-badge">
                 <span data-lang="fr">Restructuration (Tidying)</span>
-                <span data-lang="en">Data Reshaping</span>
+                <span data-lang="en">Reshaping (Tidying)</span>
               </span>
             </div>
             <p class="case-description" id="case-4-desc">
               <span data-lang="fr">Passer d'un format large à un format long (pivot_longer) pour préparer vos données à l'analyse. Sélectionnez les colonnes à pivoter pour restructurer vos séries temporelles en un clic.</span>
-              <span data-lang="en">Reshape from wide to long format (pivot_longer) to prepare your dataset for tidy analysis. Select columns to pivot and restructure longitudinal indicators in a single click.</span>
+              <span data-lang="en">Transform wide data into a long tidy format (pivot_longer) to prepare series for analysis. Select columns visually to reshape time series data in a single click.</span>
             </p>
 
             <!-- CONTENEUR VIDÉO RESPONSIVE -->
@@ -1450,11 +1450,11 @@ donnees_consolidees &lt;- ventes %&gt;%
                 <div class="video-placeholder-content">
                   <div class="video-placeholder-title">
                     <span data-lang="fr">Démonstration vidéo — Cas 4 : Pivot &amp; Format long</span>
-                    <span data-lang="en">Video Walkthrough — Case 4: Pivot &amp; Long Format</span>
+                    <span data-lang="en">Video Walkthrough — Case 4: Pivot &amp; Long format</span>
                   </div>
                   <div class="video-placeholder-sub">
                     <span data-lang="fr">Transposition des colonnes temporelles pour le standard Tidy Data</span>
-                    <span data-lang="en">Reshaping multi-period columns to meet Tidy Data standards</span>
+                    <span data-lang="en">Time series column pivoting for Tidy Data standards</span>
                   </div>
                   <a 
                     href="https://github.com/census-specs/hygie" 
@@ -1538,7 +1538,7 @@ suivi_long &lt;- suivi_annuel %&gt;%
             </div>
             <p class="case-description" id="case-5-desc">
               <span data-lang="fr">Exécuter un workflow complet et exporter le script R 100% reproductible généré par Hygie. Copiez l'historique complet des commandes pour documenter votre chaîne de traitement dans un rapport Quarto ou RMarkdown.</span>
-              <span data-lang="en">Execute an end-to-end data preparation workflow and export the 100% reproducible R script generated by Hygie. Integrate clean transformation pipelines into Quarto or RMarkdown reports.</span>
+              <span data-lang="en">Run an end-to-end data pipeline and extract the 100% reproducible R script built by Hygie. Copy the command history to document processing in Quarto or RMarkdown.</span>
             </p>
 
             <!-- CONTENEUR VIDÉO RESPONSIVE -->
@@ -1547,11 +1547,11 @@ suivi_long &lt;- suivi_annuel %&gt;%
                 <div class="video-placeholder-content">
                   <div class="video-placeholder-title">
                     <span data-lang="fr">Démonstration vidéo — Cas 5 : Export &amp; Script complet</span>
-                    <span data-lang="en">Video Walkthrough — Case 5: Complete Script Export</span>
+                    <span data-lang="en">Video Walkthrough — Case 5: Full Pipeline &amp; Export</span>
                   </div>
                   <div class="video-placeholder-sub">
                     <span data-lang="fr">Extraction du pipeline R complet et export vers formats multiples</span>
-                    <span data-lang="en">Full R pipeline extraction and multi-format dataset export</span>
+                    <span data-lang="en">Extracting full R pipeline and multi-format dataset export</span>
                   </div>
                   <a 
                     href="https://github.com/census-specs/hygie" 
@@ -1636,7 +1636,7 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
 
         <h2 id="propos-titre" style="margin-top: 0;">
           <span data-lang="fr">À propos du projet</span>
-          <span data-lang="en">About the Project</span>
+          <span data-lang="en">About the project</span>
         </h2>
         <p id="propos-desc">
           <span data-lang="fr">Hygie est développé pour simplifier l'analyse de données et offrir une passerelle intuitive vers l'écosystème R tidyverse.</span>
@@ -1677,7 +1677,7 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
               <span data-lang="en">License:</span>
             </strong>
             <span data-lang="fr"> Ce projet est distribué sous licence libre MIT.</span>
-            <span data-lang="en"> This project is distributed under the open-source MIT License.</span>
+            <span data-lang="en"> This project is licensed under the MIT License.</span>
           </div>
         </div>
 
@@ -1696,43 +1696,12 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT PUR POUR LA GESTION DES ONGLETS, LANGUES ET COPIE -->
+  <!-- ==========================================================================
+       SCRIPTS JAVASCRIPT VANILLA : GESTION ONGLETS, LANGUE & CANVAS
+       ========================================================================== -->
   <script>
     /**
-     * Gestion du changement de langue (FR / EN)
-     * @param {string} lang - 'fr' | 'en'
-     */
-    function setLanguage(lang) {
-      if (lang !== 'fr' && lang !== 'en') lang = 'fr';
-      
-      document.documentElement.lang = lang;
-      
-      // Mise à jour des boutons de langue
-      const btnFr = document.getElementById('lang-btn-fr');
-      const btnEn = document.getElementById('lang-btn-en');
-      
-      if (btnFr && btnEn) {
-        if (lang === 'fr') {
-          btnFr.classList.add('active');
-          btnFr.setAttribute('aria-pressed', 'true');
-          btnEn.classList.remove('active');
-          btnEn.setAttribute('aria-pressed', 'false');
-        } else {
-          btnEn.classList.add('active');
-          btnEn.setAttribute('aria-pressed', 'true');
-          btnFr.classList.remove('active');
-          btnFr.setAttribute('aria-pressed', 'false');
-        }
-      }
-
-      // Sauvegarde dans le localStorage si disponible
-      try {
-        localStorage.setItem('hygie_lang', lang);
-      } catch (e) {}
-    }
-
-    /**
-     * Gestion des onglets sans dépendances externes
+     * Gestion des onglets
      * @param {string} tabName - 'accueil' | 'guide' | 'formation' | 'propos'
      */
     function switchTab(tabName) {
@@ -1762,17 +1731,40 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
         }
       });
 
-      // Synchronisation du hash d'URL
       if (history.replaceState) {
         history.replaceState(null, '', '#' + tabName);
       }
       
-      // Remonter en haut de page de manière fluide
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     /**
-     * Copie de code dans le presse-papier avec feedback visuel bilingue
+     * Changement de langue (Français / Anglais)
+     * @param {string} lang - 'fr' | 'en'
+     */
+    function setLanguage(lang) {
+      if (lang !== 'fr' && lang !== 'en') return;
+
+      document.documentElement.setAttribute('lang', lang);
+
+      const btnFr = document.getElementById('lang-btn-fr');
+      const btnEn = document.getElementById('lang-btn-en');
+
+      if (lang === 'fr') {
+        if (btnFr) { btnFr.classList.add('active'); btnFr.setAttribute('aria-pressed', 'true'); }
+        if (btnEn) { btnEn.classList.remove('active'); btnEn.setAttribute('aria-pressed', 'false'); }
+      } else {
+        if (btnEn) { btnEn.classList.add('active'); btnEn.setAttribute('aria-pressed', 'true'); }
+        if (btnFr) { btnFr.classList.remove('active'); btnFr.setAttribute('aria-pressed', 'false'); }
+      }
+
+      try {
+        localStorage.setItem('hygie_lang', lang);
+      } catch (e) {}
+    }
+
+    /**
+     * Copie de code dans le presse-papier avec feedback bilingue
      * @param {string} codeElementId - ID de l'élément <code>
      * @param {string} btnElementId - ID du bouton de copie
      */
@@ -1782,15 +1774,15 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
       if (!codeElement || !btnElement) return;
 
       const text = codeElement.innerText || codeElement.textContent;
-      const isEnglish = document.documentElement.lang === 'en';
+      const currentLang = document.documentElement.getAttribute('lang') || 'fr';
       
       navigator.clipboard.writeText(text).then(function() {
-        const originalHtml = btnElement.innerHTML;
-        btnElement.innerText = isEnglish ? 'Copied!' : 'Copié !';
+        const originalHTML = btnElement.innerHTML;
+        btnElement.innerText = currentLang === 'en' ? 'Copied!' : 'Copié !';
         btnElement.classList.add('copied');
 
         setTimeout(function() {
-          btnElement.innerHTML = originalHtml;
+          btnElement.innerHTML = originalHTML;
           btnElement.classList.remove('copied');
         }, 2000);
       }).catch(function(err) {
@@ -1798,28 +1790,21 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
       });
     }
 
-    // Initialisation au chargement de la page
+    // Gestion du chargement initial (hash et langue)
     window.addEventListener('DOMContentLoaded', function() {
-      // 1. Détection de la langue enregistrée ou par défaut (FR)
       try {
         const savedLang = localStorage.getItem('hygie_lang');
-        if (savedLang === 'en' || savedLang === 'fr') {
+        if (savedLang && (savedLang === 'fr' || savedLang === 'en')) {
           setLanguage(savedLang);
-        } else {
-          setLanguage('fr');
         }
-      } catch (e) {
-        setLanguage('fr');
-      }
+      } catch (e) {}
 
-      // 2. Gestion du hash initial d'URL
       const hash = window.location.hash.replace('#', '');
       if (hash && ['accueil', 'guide', 'formation', 'propos'].includes(hash)) {
         switchTab(hash);
       }
     });
 
-    // Support des boutons d'historique du navigateur
     window.addEventListener('hashchange', function() {
       const hash = window.location.hash.replace('#', '');
       if (hash && ['accueil', 'guide', 'formation', 'propos'].includes(hash)) {
@@ -1828,158 +1813,86 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
     });
 
     /* ==========================================================================
-       ANIMATION DE FILIGRANE STATISTIQUE & R (CANVAS PUR JAVASCRIPT)
+       CANVAS STATISTIQUE & R SÉCURISÉ (REQUESTANIMATIONFRAME, STRICTEMENT < 50 PARTICULES)
        ========================================================================== */
     (function initWatermarkCanvas() {
       const canvas = document.getElementById('bg-canvas');
       if (!canvas) return;
 
-      const ctx = canvas.getContext('2d', { alpha: true });
+      const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      // Symboles statistiques et R requis
-      const symbols = [
-        { text: '∑', font: 'serif', weight: 'normal' },
-        { text: '{}', font: 'mono', weight: 'bold' },
-        { text: '%>%', font: 'mono', weight: 'bold' },
-        { text: 'R', font: 'serif', weight: 'bold' },
-        { text: 'µ', font: 'serif', weight: 'normal' },
-        { text: 'σ', font: 'serif', weight: 'normal' },
-        { text: 'f(x)', font: 'serif', weight: 'italic' },
-        { text: '<-', font: 'mono', weight: 'bold' },
-        { text: 'β', font: 'serif', weight: 'normal' },
-        { text: 'λ', font: 'serif', weight: 'normal' },
-        { text: 'π', font: 'serif', weight: 'normal' },
-        { text: 'α', font: 'serif', weight: 'normal' },
-        { text: '%>%', font: 'mono', weight: 'bold' },
-        { text: '<-', font: 'mono', weight: 'bold' },
-        { text: '∑', font: 'serif', weight: 'normal' },
-        { text: 'df', font: 'mono', weight: 'normal' }
-      ];
-
+      // Symboles requis : "∑", "{}", "%>%", "R", "µ", "σ", "f(x)", "<-"
+      const symbols = ["∑", "{}", "%>%", "R", "µ", "σ", "f(x)", "<-"];
+      const MAX_PARTICLES = 35; // Maximum strict < 50
+      let particles = [];
       let width = window.innerWidth;
       let height = window.innerHeight;
-      let dpr = window.devicePixelRatio || 1;
-      let particles = [];
-      let animationFrameId = null;
-      let isVisible = true;
 
-      function resizeCanvas() {
+      function resize() {
         width = window.innerWidth;
         height = window.innerHeight;
-        dpr = window.devicePixelRatio || 1;
-
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        canvas.style.width = width + 'px';
-        canvas.style.height = height + 'px';
-
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.scale(dpr, dpr);
-
-        initParticles();
+        canvas.width = width;
+        canvas.height = height;
       }
 
-      function initParticles() {
+      function createParticle() {
+        return {
+          text: symbols[Math.floor(Math.random() * symbols.length)],
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: Math.floor(Math.random() * 12) + 16, // 16px à 28px
+          speedY: Math.random() * 0.25 + 0.15, // Vitesse lente vers le haut
+          isMono: Math.random() > 0.5
+        };
+      }
+
+      function init() {
+        resize();
         particles = [];
-        // Densité calculée selon la taille d'écran pour un effet discret
-        const count = Math.max(18, Math.min(38, Math.floor((width * height) / 45000)));
-
-        for (let i = 0; i < count; i++) {
-          const sym = symbols[Math.floor(Math.random() * symbols.length)];
-          const size = Math.floor(Math.random() * 14) + 16; // 16px à 30px
-          const fontFace = sym.font === 'mono' 
-            ? "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace" 
-            : "Georgia, Cambria, 'Times New Roman', serif";
-
-          particles.push({
-            text: sym.text,
-            font: `${sym.weight} ${size}px ${fontFace}`,
-            size: size,
-            x: Math.random() * width,
-            y: Math.random() * height,
-            // Vitesse verticale extrêmement lente (de bas en haut)
-            speedY: -(Math.random() * 0.22 + 0.12),
-            // Dérive sinusoïdale horizontale
-            waveSpeed: Math.random() * 0.0012 + 0.0006,
-            waveAmp: Math.random() * 22 + 8,
-            seed: Math.random() * 1000,
-            // Opacité ultra-discrète (0.025 à 0.048) en bleu nuit académique
-            opacity: Math.random() * 0.024 + 0.026,
-            // Légère rotation statique ou ultra lente
-            rotation: (Math.random() - 0.5) * 0.2
-          });
+        for (let i = 0; i < MAX_PARTICLES; i++) {
+          particles.push(createParticle());
         }
       }
 
-      let lastTime = performance.now();
+      function animate() {
+        // Nettoyage complet à chaque frame
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      function render(now) {
-        if (!isVisible) {
-          animationFrameId = requestAnimationFrame(render);
-          return;
-        }
-
-        const delta = Math.min(now - lastTime, 100);
-        lastTime = now;
-
-        ctx.clearRect(0, 0, width, height);
-
-        const time = now * 0.001;
+        // Opacité fixée à 0.05 en bleu nuit (#1b365d)
+        ctx.fillStyle = "rgba(27, 54, 93, 0.05)";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
 
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
+          
+          // Déplacement très lent vers le haut
+          p.y -= p.speedY;
 
-          // Mise à jour de la position verticale (vers le haut)
-          p.y += p.speedY * (delta / 16.6);
-
-          // Si la particule sort par le haut, la replacer en bas
-          if (p.y < -40) {
-            p.y = height + 30;
+          // Réinitialisation fluide quand une particule sort en haut
+          if (p.y < -30) {
+            p.y = height + 20;
             p.x = Math.random() * width;
           }
 
-          // Dérive sinusoïdale fluide
-          const currentX = p.x + Math.sin(time * 0.6 + p.seed) * p.waveAmp;
+          ctx.font = p.isMono
+            ? `bold ${p.size}px 'SFMono-Regular', Consolas, Menlo, monospace`
+            : `normal ${p.size}px Georgia, 'Times New Roman', serif`;
 
-          // Dessin du symbole
-          ctx.save();
-          ctx.translate(currentX, p.y);
-          if (p.rotation !== 0) {
-            ctx.rotate(p.rotation);
-          }
-
-          ctx.font = p.font;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          
-          // Couleur bleu nuit institutionnelle (#1b365d) avec très faible opacité
-          ctx.fillStyle = `rgba(27, 54, 93, ${p.opacity})`;
-          ctx.fillText(p.text, 0, 0);
-
-          ctx.restore();
+          ctx.fillText(p.text, p.x, p.y);
         }
 
-        animationFrameId = requestAnimationFrame(render);
+        requestAnimationFrame(animate);
       }
 
-      // Initialisation
-      resizeCanvas();
-      animationFrameId = requestAnimationFrame(render);
+      init();
+      requestAnimationFrame(animate);
 
-      // Gestionnaires d'événements
-      let resizeTimeout;
+      let resizeTimer;
       window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(resizeCanvas, 150);
-      });
-
-      // Pause quand l'onglet n'est pas actif pour économiser la batterie
-      document.addEventListener('visibilitychange', function() {
-        isVisible = !document.hidden;
-        if (isVisible) {
-          lastTime = performance.now();
-        }
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 150);
       });
     })();
   </script>
