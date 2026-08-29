@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hygie — Traitement Interactif des Données sous R</title>
+  <title>Hygie — Traitement Interactif des Données sous R | Interactive Data Processing in R</title>
   <meta name="description" content="Site officiel du paquet R Hygie — Outil de préparation et de nettoyage interactif de données sous R inspiré de PowerQuery.">
   <meta property="og:title" content="Hygie — Traitement Interactif des Données sous R">
   <meta property="og:description" content="Un outil de préparation et de nettoyage de données inspiré de PowerQuery pour R, avec interface graphique interactive.">
@@ -51,6 +51,34 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+    }
+
+    /* ==========================================================================
+       GESTION MULTILINGUE VIA CSS & DATA-LANG
+       ========================================================================== */
+    html[lang="fr"] [data-lang="en"] {
+      display: none !important;
+    }
+
+    html[lang="en"] [data-lang="fr"] {
+      display: none !important;
+    }
+
+    /* Inline text switches */
+    span[data-lang], strong[data-lang], a[data-lang], em[data-lang] {
+      display: inline;
+    }
+    html[lang="fr"] span[data-lang="en"],
+    html[lang="fr"] strong[data-lang="en"],
+    html[lang="fr"] a[data-lang="en"],
+    html[lang="fr"] em[data-lang="en"] {
+      display: none !important;
+    }
+    html[lang="en"] span[data-lang="fr"],
+    html[lang="en"] strong[data-lang="fr"],
+    html[lang="en"] a[data-lang="fr"],
+    html[lang="en"] em[data-lang="fr"] {
+      display: none !important;
     }
 
     /* ==========================================================================
@@ -106,6 +134,20 @@
     }
 
     /* ==========================================================================
+       ARRIÈRE-PLAN ANIMÉ EN FILIGRANE (CANVAS STATISTIQUE / R)
+       ========================================================================== */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* ==========================================================================
        STRUCTURE DE PAGE & HEADER INSTITUTIONNEL
        ========================================================================== */
     .site-container {
@@ -117,7 +159,9 @@
 
     header.site-header {
       border-bottom: 1px solid var(--border-color);
-      background-color: var(--bg-page);
+      background-color: rgba(252, 252, 252, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -127,9 +171,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 0;
+      padding: 0.85rem 0;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.75rem;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
     .brand-title {
@@ -159,6 +209,47 @@
       border-radius: 3px;
     }
 
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* SÉLECTEUR DE LANGUE (FR / EN) */
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: #ffffff;
+      padding: 2px;
+      font-size: 0.8rem;
+      font-family: var(--font-sans);
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      padding: 0.25rem 0.55rem;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      line-height: 1;
+    }
+
+    .lang-btn:hover {
+      color: var(--color-primary);
+    }
+
+    .lang-btn.active {
+      background-color: var(--color-primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
     /* ==========================================================================
        SYSTÈME D'ONGLETS ÉPURÉ (STYLE ACADÉMIQUE / QUARTO)
        ========================================================================== */
@@ -174,9 +265,9 @@
       border-bottom: none;
       color: var(--text-muted);
       font-family: var(--font-sans);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 500;
-      padding: 0.5rem 0.85rem;
+      padding: 0.45rem 0.8rem;
       cursor: pointer;
       border-radius: 4px 4px 0 0;
       transition: color 0.15s ease, background-color 0.15s ease;
@@ -285,7 +376,9 @@
       margin: 1rem 0 1.25rem 0;
       border: 1px solid var(--border-color);
       border-radius: 4px;
-      background-color: var(--code-bg);
+      background-color: rgba(244, 244, 246, 0.90);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .code-block-header {
@@ -294,7 +387,7 @@
       align-items: center;
       padding: 0.4rem 0.85rem;
       border-bottom: 1px solid var(--border-light);
-      background-color: #ededf1;
+      background-color: rgba(237, 237, 241, 0.90);
       font-size: 0.78rem;
       font-family: var(--font-mono);
       color: var(--text-muted);
@@ -364,7 +457,9 @@
       border: 1px solid var(--border-color);
       border-radius: 4px;
       padding: 1.25rem;
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .feature-card h3 {
@@ -395,7 +490,9 @@
       border: 1px solid var(--border-color);
       border-radius: 4px;
       padding: 1.5rem;
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .case-card-header {
@@ -487,7 +584,7 @@
 
     .video-actions-bar {
       padding: 0.5rem 0.85rem;
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.90);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -501,7 +598,9 @@
     .data-download-bar {
       margin: 1rem 0;
       padding: 0.75rem 1rem;
-      background-color: #fafafa;
+      background-color: rgba(250, 250, 250, 0.88);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       border: 1px solid var(--border-color);
       border-radius: 4px;
       display: flex;
@@ -570,7 +669,9 @@
     .author-info-box {
       border: 1px solid var(--border-color);
       border-radius: 4px;
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
@@ -597,7 +698,7 @@
     .author-info-table th {
       font-weight: 600;
       color: var(--color-primary);
-      width: 140px;
+      width: 150px;
     }
 
     .license-note {
@@ -605,7 +706,9 @@
       color: var(--text-muted);
       margin-top: 1.25rem;
       padding: 0.85rem 1rem;
-      background-color: var(--code-bg);
+      background-color: rgba(244, 244, 246, 0.90);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       border-left: 3px solid var(--color-primary);
       border-radius: 0 4px 4px 0;
     }
@@ -616,7 +719,9 @@
     footer.site-footer {
       border-top: 1px solid var(--border-color);
       padding: 1.75rem 0;
-      background-color: var(--bg-page);
+      background-color: rgba(252, 252, 252, 0.92);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       font-size: 0.88rem;
       color: var(--text-muted);
       text-align: center;
@@ -634,6 +739,10 @@
         flex-direction: column;
         align-items: flex-start;
       }
+      .header-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
       nav.tab-nav {
         width: 100%;
         border-bottom: 1px solid var(--border-color);
@@ -641,8 +750,8 @@
       .tab-btn {
         flex: 1 1 45%;
         text-align: center;
-        padding: 0.5rem 0.4rem;
-        font-size: 0.84rem;
+        padding: 0.5rem 0.35rem;
+        font-size: 0.82rem;
       }
       .feature-grid {
         grid-template-columns: 1fr;
@@ -651,7 +760,7 @@
         padding: 1.15rem;
       }
       .author-info-table th {
-        width: 110px;
+        width: 120px;
       }
       .data-download-bar {
         flex-direction: column;
@@ -663,7 +772,7 @@
        PRINT STYLES
        ========================================================================== */
     @media print {
-      header.site-header, .btn-group, .copy-btn, nav.tab-nav, .video-container {
+      header.site-header, .btn-group, .copy-btn, nav.tab-nav, .video-container, .lang-switcher {
         display: none !important;
       }
       .tab-panel {
@@ -679,52 +788,85 @@
 </head>
 <body>
 
+  <!-- ARRIÈRE-PLAN ANIMÉ EN FILIGRANE (CANVAS FIXÉ PLEIN ÉCRAN) -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
   <!-- HEADER INSTITUTIONNEL -->
   <header class="site-header" id="site-header">
     <div class="site-container header-inner">
-      <a href="#accueil" class="brand-title" id="brand-link" onclick="switchTab('accueil'); return false;">
-        hygie <span class="brand-badge">R package</span>
-      </a>
+      <div class="brand-section">
+        <a href="#accueil" class="brand-title" id="brand-link" onclick="switchTab('accueil'); return false;">
+          hygie <span class="brand-badge">R package</span>
+        </a>
+      </div>
 
-      <!-- NAVIGATION PAR ONGLETS (4 ONGLETS) -->
-      <nav class="tab-nav" id="tab-navigation" role="tablist" aria-label="Navigation principale">
-        <button 
-          class="tab-btn active" 
-          id="tab-btn-accueil" 
-          role="tab" 
-          aria-selected="true" 
-          aria-controls="panel-accueil" 
-          onclick="switchTab('accueil')">
-          Accueil
-        </button>
-        <button 
-          class="tab-btn" 
-          id="tab-btn-guide" 
-          role="tab" 
-          aria-selected="false" 
-          aria-controls="panel-guide" 
-          onclick="switchTab('guide')">
-          Guide d'utilisation
-        </button>
-        <button 
-          class="tab-btn" 
-          id="tab-btn-formation" 
-          role="tab" 
-          aria-selected="false" 
-          aria-controls="panel-formation" 
-          onclick="switchTab('formation')">
-          Formation &amp; Cas pratiques
-        </button>
-        <button 
-          class="tab-btn" 
-          id="tab-btn-propos" 
-          role="tab" 
-          aria-selected="false" 
-          aria-controls="panel-propos" 
-          onclick="switchTab('propos')">
-          À propos
-        </button>
-      </nav>
+      <div class="header-controls">
+        <!-- NAVIGATION PAR ONGLETS (4 ONGLETS) -->
+        <nav class="tab-nav" id="tab-navigation" role="tablist" aria-label="Navigation principale">
+          <button 
+            class="tab-btn active" 
+            id="tab-btn-accueil" 
+            role="tab" 
+            aria-selected="true" 
+            aria-controls="panel-accueil" 
+            onclick="switchTab('accueil')">
+            <span data-lang="fr">Accueil</span>
+            <span data-lang="en">Home</span>
+          </button>
+          <button 
+            class="tab-btn" 
+            id="tab-btn-guide" 
+            role="tab" 
+            aria-selected="false" 
+            aria-controls="panel-guide" 
+            onclick="switchTab('guide')">
+            <span data-lang="fr">Guide d'utilisation</span>
+            <span data-lang="en">User Guide</span>
+          </button>
+          <button 
+            class="tab-btn" 
+            id="tab-btn-formation" 
+            role="tab" 
+            aria-selected="false" 
+            aria-controls="panel-formation" 
+            onclick="switchTab('formation')">
+            <span data-lang="fr">Formation &amp; Cas pratiques</span>
+            <span data-lang="en">Training &amp; Use Cases</span>
+          </button>
+          <button 
+            class="tab-btn" 
+            id="tab-btn-propos" 
+            role="tab" 
+            aria-selected="false" 
+            aria-controls="panel-propos" 
+            onclick="switchTab('propos')">
+            <span data-lang="fr">À propos</span>
+            <span data-lang="en">About</span>
+          </button>
+        </nav>
+
+        <!-- BASCULE DE LANGUE (FR / EN) -->
+        <div class="lang-switcher" id="lang-toggle-group" role="group" aria-label="Sélection de la langue / Language selection">
+          <button 
+            type="button" 
+            class="lang-btn active" 
+            id="lang-btn-fr" 
+            onclick="setLanguage('fr')" 
+            aria-label="Passer en Français" 
+            aria-pressed="true">
+            FR
+          </button>
+          <button 
+            type="button" 
+            class="lang-btn" 
+            id="lang-btn-en" 
+            onclick="setLanguage('en')" 
+            aria-label="Switch to English" 
+            aria-pressed="false">
+            EN
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -733,7 +875,7 @@
     <div class="site-container">
 
       <!-- ====================================================================
-           SECTION 1 : ACCUEIL
+           SECTION 1 : ACCUEIL / HOME
            ==================================================================== -->
       <section 
         id="panel-accueil" 
@@ -741,9 +883,16 @@
         role="tabpanel" 
         aria-labelledby="tab-btn-accueil">
         
-        <h1 id="accueil-titre">Hygie — Traitement Interactif des Données sous R</h1>
+        <!-- TITRE PRINCIPAL -->
+        <h1 id="accueil-titre">
+          <span data-lang="fr">Hygie — Traitement Interactif des Données sous R</span>
+          <span data-lang="en">Hygie — Interactive Data Processing in R</span>
+        </h1>
+
+        <!-- SOUS-TITRE -->
         <p class="lead-text" id="accueil-description">
-          Un outil de préparation et de nettoyage de données inspiré de PowerQuery pour R, avec interface graphique interactive.
+          <span data-lang="fr">Un outil de préparation et de nettoyage de données inspiré de PowerQuery pour R, avec interface graphique interactive.</span>
+          <span data-lang="en">A PowerQuery-inspired data preparation and cleaning tool for R, featuring an interactive GUI.</span>
         </p>
 
         <!-- BOUTONS D'ACTION -->
@@ -754,27 +903,36 @@
             rel="noopener noreferrer" 
             class="btn btn-primary" 
             id="btn-github">
-            Voir sur GitHub
+            <span data-lang="fr">Voir sur GitHub</span>
+            <span data-lang="en">View on GitHub</span>
           </a>
           <button 
             type="button" 
             class="btn btn-secondary" 
             id="btn-doc" 
             onclick="switchTab('guide')">
-            Documentation
+            <span data-lang="fr">Documentation</span>
+            <span data-lang="en">User Guide</span>
           </button>
           <button 
             type="button" 
             class="btn btn-secondary" 
             id="btn-formation-hero" 
             onclick="switchTab('formation')">
-            Cas Pratiques
+            <span data-lang="fr">Cas Pratiques</span>
+            <span data-lang="en">Use Cases</span>
           </button>
         </div>
 
         <!-- BLOC INSTALLATION RAPIDE -->
-        <h2 id="installation-titre">Installation Rapide</h2>
-        <p>Installez la version de développement directement depuis GitHub via le paquet <code>remotes</code> :</p>
+        <h2 id="installation-titre">
+          <span data-lang="fr">Installation Rapide</span>
+          <span data-lang="en">Quick Installation</span>
+        </h2>
+        <p>
+          <span data-lang="fr">Installez la version de développement directement depuis GitHub via le paquet <code>remotes</code> :</span>
+          <span data-lang="en">Install the development version directly from GitHub using the <code>remotes</code> package:</span>
+        </p>
 
         <div class="code-block-container" id="install-code-block">
           <div class="code-block-header">
@@ -785,41 +943,69 @@
               id="copy-install-btn" 
               onclick="copyCode('install-code', 'copy-install-btn')" 
               aria-label="Copier le code d'installation">
-              Copier
+              <span data-lang="fr">Copier</span>
+              <span data-lang="en">Copy</span>
             </button>
           </div>
           <pre><code id="install-code">if (!requireNamespace("remotes", quietly = TRUE)) { install.packages("remotes") }
 remotes::install_github("census-specs/hygie")</code></pre>
         </div>
 
-        <!-- GRILLE DES POINTS CLÉS (2 COLONNES) -->
-        <h2 id="points-cles-titre">Fonctionnalités Clés</h2>
+        <!-- GRILLE DES POINTS CLÉS (4 POINTS) -->
+        <h2 id="points-cles-titre">
+          <span data-lang="fr">Fonctionnalités Clés</span>
+          <span data-lang="en">Key Features</span>
+        </h2>
         <div class="feature-grid" id="points-cles-grid">
           <div class="feature-card" id="feature-sans-code">
-            <h3>Sans Code</h3>
-            <p>Importez, filtrez, nettoyez et combinez vos données via des fenêtres de dialogue interactives.</p>
+            <h3>
+              <span data-lang="fr">Sans Code</span>
+              <span data-lang="en">No Code</span>
+            </h3>
+            <p>
+              <span data-lang="fr">Importez, filtrez, nettoyez et combinez vos données via des fenêtres de dialogue interactives.</span>
+              <span data-lang="en">Import, filter, clean, and combine your data through interactive dialog windows.</span>
+            </p>
           </div>
 
           <div class="feature-card" id="feature-reproductible">
-            <h3>Reproductible</h3>
-            <p>Génère automatiquement le code R équivalent respectant les standards de l'écosystème tidyverse.</p>
+            <h3>
+              <span data-lang="fr">Reproductible</span>
+              <span data-lang="en">Reproducible</span>
+            </h3>
+            <p>
+              <span data-lang="fr">Génère automatiquement le code R équivalent respectant les standards de l'écosystème Tidyverse.</span>
+              <span data-lang="en">Automatically generates equivalent R code adhering to Tidyverse ecosystem standards.</span>
+            </p>
           </div>
 
           <div class="feature-card" id="feature-multiformats">
-            <h3>Multi-formats</h3>
-            <p>Supporte CSV, Excel (.xlsx, .xls), SPSS (.sav), SAS, Stata, JSON et fichiers natifs RDS.</p>
+            <h3>
+              <span data-lang="fr">Multi-formats</span>
+              <span data-lang="en">Multi-format</span>
+            </h3>
+            <p>
+              <span data-lang="fr">Supporte CSV, Excel (.xlsx, .xls), SPSS (.sav), SAS, Stata, JSON et fichiers natifs RDS.</span>
+              <span data-lang="en">Supports CSV, Excel (.xlsx, .xls), SPSS (.sav), SAS, Stata, JSON, and native RDS files.</span>
+            </p>
           </div>
 
           <div class="feature-card" id="feature-historique">
-            <h3>Historique Dynamique</h3>
-            <p>Visualisez, annulez ou réordonnez chaque étape de transformation pas à pas.</p>
+            <h3>
+              <span data-lang="fr">Historique Dynamique</span>
+              <span data-lang="en">Dynamic History</span>
+            </h3>
+            <p>
+              <span data-lang="fr">Visualisez, annulez ou réordonnez chaque étape de transformation pas à pas.</span>
+              <span data-lang="en">View, undo, or reorder every transformation step seamlessly.</span>
+            </p>
           </div>
         </div>
 
       </section>
 
       <!-- ====================================================================
-           SECTION 2 : GUIDE D'UTILISATION
+           SECTION 2 : GUIDE D'UTILISATION / USER GUIDE
            ==================================================================== -->
       <section 
         id="panel-guide" 
@@ -827,12 +1013,21 @@ remotes::install_github("census-specs/hygie")</code></pre>
         role="tabpanel" 
         aria-labelledby="tab-btn-guide">
 
-        <h2 id="guide-titre" style="margin-top: 0;">Mode d'emploi</h2>
+        <h2 id="guide-titre" style="margin-top: 0;">
+          <span data-lang="fr">Mode d'emploi</span>
+          <span data-lang="en">How to use</span>
+        </h2>
 
         <!-- ÉTAPE 1 -->
         <div class="step-section" id="step-1-section">
-          <h3 id="step-1-titre">Étape 1 : Lancement de l'application dans R</h3>
-          <p>Après installation, chargez le paquet et lancez l'interface avec la fonction unique :</p>
+          <h3 id="step-1-titre">
+            <span data-lang="fr">Étape 1 : Lancement dans R</span>
+            <span data-lang="en">Step 1: Launching in R</span>
+          </h3>
+          <p>
+            <span data-lang="fr">Après installation, chargez le paquet et lancez l'interface avec la fonction unique :</span>
+            <span data-lang="en">After installation, load the package and launch the interface with the single function:</span>
+          </p>
           
           <div class="code-block-container" id="step1-code-block">
             <div class="code-block-header">
@@ -843,7 +1038,8 @@ remotes::install_github("census-specs/hygie")</code></pre>
                 id="copy-step1-btn" 
                 onclick="copyCode('step1-code', 'copy-step1-btn')" 
                 aria-label="Copier le code de l'étape 1">
-                Copier
+                <span data-lang="fr">Copier</span>
+                <span data-lang="en">Copy</span>
               </button>
             </div>
             <pre><code id="step1-code">library(hygie)
@@ -853,8 +1049,14 @@ run_hygie()</code></pre>
 
         <!-- ÉTAPE 2 -->
         <div class="step-section" id="step-2-section">
-          <h3 id="step-2-titre">Étape 2 : Lancement personnalisé (Optionnel)</h3>
-          <p>Pour lancer l'application sur un port précis sans ouvrir le navigateur externe :</p>
+          <h3 id="step-2-titre">
+            <span data-lang="fr">Étape 2 : Lancement personnalisé (Optionnel)</span>
+            <span data-lang="en">Step 2: Custom launch (Port 3838)</span>
+          </h3>
+          <p>
+            <span data-lang="fr">Pour lancer l'application sur un port précis sans ouvrir le navigateur externe :</span>
+            <span data-lang="en">To launch the application on a specific port inside the RStudio viewer pane:</span>
+          </p>
           
           <div class="code-block-container" id="step2-code-block">
             <div class="code-block-header">
@@ -865,7 +1067,8 @@ run_hygie()</code></pre>
                 id="copy-step2-btn" 
                 onclick="copyCode('step2-code', 'copy-step2-btn')" 
                 aria-label="Copier le code de l'étape 2">
-                Copier
+                <span data-lang="fr">Copier</span>
+                <span data-lang="en">Copy</span>
               </button>
             </div>
             <pre><code id="step2-code">run_hygie(port = 3838, launch.browser = rstudioapi::viewer)</code></pre>
@@ -874,16 +1077,34 @@ run_hygie()</code></pre>
 
         <!-- ÉTAPE 3 -->
         <div class="step-section" id="step-3-section">
-          <h3 id="step-3-titre">Étape 3 : Flux de travail dans l'interface</h3>
+          <h3 id="step-3-titre">
+            <span data-lang="fr">Étape 3 : Flux de travail dans l'interface</span>
+            <span data-lang="en">Step 3: Workflow in the interface</span>
+          </h3>
           <ol class="workflow-list" id="workflow-steps-list">
             <li>
-              <strong>Importation :</strong> Choisissez votre fichier depuis le menu dédié.
+              <strong>
+                <span data-lang="fr">1. Importation :</span>
+                <span data-lang="en">1. Import:</span>
+              </strong>
+              <span data-lang="fr"> Choisissez votre fichier depuis le menu dédié.</span>
+              <span data-lang="en"> Choose your dataset file from the dedicated menu.</span>
             </li>
             <li>
-              <strong>Nettoyage &amp; Transformation :</strong> Appliquez vos filtres, recodages ou jointures.
+              <strong>
+                <span data-lang="fr">2. Nettoyage &amp; Transformation :</span>
+                <span data-lang="en">2. Cleaning &amp; Transformation:</span>
+              </strong>
+              <span data-lang="fr"> Appliquez vos filtres, recodages ou jointures.</span>
+              <span data-lang="en"> Apply your filters, recoding, or dataset joins.</span>
             </li>
             <li>
-              <strong>Code R &amp; Export :</strong> Consultez l'onglet code généré et exportez le résultat final sous le format désiré.
+              <strong>
+                <span data-lang="fr">3. Code R &amp; Export :</span>
+                <span data-lang="en">3. R Code &amp; Export:</span>
+              </strong>
+              <span data-lang="fr"> Consultez l'onglet code généré et exportez le résultat final sous le format désiré.</span>
+              <span data-lang="en"> Inspect the generated code tab and export the final dataset in your preferred format.</span>
             </li>
           </ol>
         </div>
@@ -891,7 +1112,7 @@ run_hygie()</code></pre>
       </section>
 
       <!-- ====================================================================
-           SECTION 3 (NOUVELLE) : FORMATION & CAS PRATIQUES
+           SECTION 3 : FORMATION & CAS PRATIQUES / TRAINING & USE CASES
            ==================================================================== -->
       <section 
         id="panel-formation" 
@@ -899,9 +1120,13 @@ run_hygie()</code></pre>
         role="tabpanel" 
         aria-labelledby="tab-btn-formation">
 
-        <h2 id="formation-titre" style="margin-top: 0;">Formation &amp; Cas Pratiques</h2>
+        <h2 id="formation-titre" style="margin-top: 0;">
+          <span data-lang="fr">Formation &amp; Cas Pratiques</span>
+          <span data-lang="en">Training &amp; Use Cases</span>
+        </h2>
         <p class="lead-text" id="formation-desc">
-          Découvrez comment utiliser Hygie à travers 5 cas pratiques concrets. Téléchargez les jeux de données réels et consultez le script R Tidyverse reproductible généré à la fin de chaque exercice.
+          <span data-lang="fr">Découvrez comment utiliser Hygie à travers 5 cas pratiques concrets. Téléchargez les jeux de données réels et consultez le script R Tidyverse reproductible généré à la fin de chaque exercice.</span>
+          <span data-lang="en">Discover how to use Hygie through 5 practical use cases. Download the real datasets and review the reproducible Tidyverse R script generated upon exercise completion.</span>
         </p>
 
         <div class="cases-container" id="cases-list">
@@ -909,38 +1134,61 @@ run_hygie()</code></pre>
           <!-- CAS 1 -->
           <article class="case-card" id="case-1-card">
             <div class="case-card-header">
-              <h3 id="case-1-title">CAS 1 : Nettoyage et gestion des valeurs manquantes</h3>
-              <span class="topic-badge" id="case-1-badge">Import &amp; Nettoyage</span>
+              <h3 id="case-1-title">
+                <span data-lang="fr">CAS 1 : Nettoyage et gestion des valeurs manquantes</span>
+                <span data-lang="en">CASE 1: Cleaning and missing values management</span>
+              </h3>
+              <span class="topic-badge" id="case-1-badge">
+                <span data-lang="fr">Import &amp; Nettoyage</span>
+                <span data-lang="en">Import &amp; Cleaning</span>
+              </span>
             </div>
             <p class="case-description" id="case-1-desc">
-              Apprenez à supprimer les doublons, traiter les valeurs manquantes (NA) et harmoniser la casse des variables textuelles. Suivez pas à pas la sélection des colonnes et la validation instantanée des transformations.
+              <span data-lang="fr">Apprenez à supprimer les doublons, traiter les valeurs manquantes (NA) et harmoniser la casse des variables textuelles. Suivez pas à pas la sélection des colonnes et la validation instantanée des transformations.</span>
+              <span data-lang="en">Learn how to remove duplicates, handle missing values (NA), and harmonize character casing across variables. Follow step-by-step column selection and real-time transformation validation.</span>
             </p>
 
             <!-- CONTENEUR VIDÉO RESPONSIVE -->
             <div class="video-container" id="case-1-video">
               <div class="video-placeholder-box">
                 <div class="video-placeholder-content">
-                  <div class="video-placeholder-title">Démonstration vidéo — Cas 1 : Nettoyage &amp; NA</div>
-                  <div class="video-placeholder-sub">Tutoriel pas-à-pas interactif dans l'interface graphique Hygie</div>
+                  <div class="video-placeholder-title">
+                    <span data-lang="fr">Démonstration vidéo — Cas 1 : Nettoyage &amp; NA</span>
+                    <span data-lang="en">Video Walkthrough — Case 1: Cleaning &amp; NA</span>
+                  </div>
+                  <div class="video-placeholder-sub">
+                    <span data-lang="fr">Tutoriel pas-à-pas interactif dans l'interface graphique Hygie</span>
+                    <span data-lang="en">Interactive step-by-step tutorial within Hygie's graphical user interface</span>
+                  </div>
                   <a 
                     href="https://github.com/census-specs/hygie" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     class="btn btn-secondary btn-sm"
                     style="background:#ffffff; margin-top:0.4rem;">
-                    Ouvrir le tutoriel vidéo (GitHub)
+                    <span data-lang="fr">Ouvrir le tutoriel vidéo (GitHub)</span>
+                    <span data-lang="en">Open video tutorial (GitHub)</span>
                   </a>
                 </div>
               </div>
               <div class="video-actions-bar">
-                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
-                <span>Durée estimée : 3 min</span>
+                <span>
+                  <span data-lang="fr">Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                  <span data-lang="en">Format: Step-by-step video (Hygie GUI)</span>
+                </span>
+                <span>
+                  <span data-lang="fr">Durée estimée : 3 min</span>
+                  <span data-lang="en">Estimated time: 3 min</span>
+                </span>
               </div>
             </div>
 
             <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
             <div class="data-download-bar" id="case-1-data">
-              <strong>Jeu de données source :</strong>
+              <strong>
+                <span data-lang="fr">Jeu de données source :</span>
+                <span data-lang="en">Source dataset:</span>
+              </strong>
               <a 
                 href="https://github.com/census-specs/hygie/raw/main/data-raw/donnees_sante.csv" 
                 class="download-link" 
@@ -951,7 +1199,10 @@ run_hygie()</code></pre>
             </div>
 
             <!-- CODE R GÉNÉRÉ -->
-            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="case-code-title">
+              <span data-lang="fr">Code R produit à la fin de l'exercice :</span>
+              <span data-lang="en">R Code generated at the end of the exercise:</span>
+            </div>
             <div class="code-block-container" id="case1-code-block">
               <div class="code-block-header">
                 <span>R Script (tidyverse)</span>
@@ -961,7 +1212,8 @@ run_hygie()</code></pre>
                   id="copy-case1-btn" 
                   onclick="copyCode('case1-code', 'copy-case1-btn')" 
                   aria-label="Copier le code du Cas 1">
-                  Copier
+                  <span data-lang="fr">Copier</span>
+                  <span data-lang="en">Copy</span>
                 </button>
               </div>
               <pre><code id="case1-code">hygie::run_hygie() # Import 'donnees_sante.csv' -&gt; Nettoyage automatique
@@ -980,38 +1232,61 @@ donnees_sante_propre &lt;- donnees_sante %&gt;%
           <!-- CAS 2 -->
           <article class="case-card" id="case-2-card">
             <div class="case-card-header">
-              <h3 id="case-2-title">CAS 2 : Recodage et création de variables conditionnelles</h3>
-              <span class="topic-badge" id="case-2-badge">Recodage &amp; Variables</span>
+              <h3 id="case-2-title">
+                <span data-lang="fr">CAS 2 : Recodage et création de variables conditionnelles</span>
+                <span data-lang="en">CASE 2: Recoding and creating conditional variables</span>
+              </h3>
+              <span class="topic-badge" id="case-2-badge">
+                <span data-lang="fr">Recodage &amp; Variables</span>
+                <span data-lang="en">Recoding &amp; Variables</span>
+              </span>
             </div>
             <p class="case-description" id="case-2-desc">
-              Transformer des variables continues en tranches d'âge et recoder des modalités spécifiques sans écrire de code. Les règles logiques sont définies visuellement puis automatiquement traduites en syntaxe R standard.
+              <span data-lang="fr">Transformer des variables continues en tranches d'âge et recoder des modalités spécifiques sans écrire de code. Les règles logiques sont définies visuellement puis automatiquement traduites en syntaxe R standard.</span>
+              <span data-lang="en">Transform continuous variables into age brackets and recode factor levels without writing code. Logic rules are set visually and automatically converted into standard R syntax.</span>
             </p>
 
             <!-- CONTENEUR VIDÉO RESPONSIVE -->
             <div class="video-container" id="case-2-video">
               <div class="video-placeholder-box">
                 <div class="video-placeholder-content">
-                  <div class="video-placeholder-title">Démonstration vidéo — Cas 2 : Recodage conditionnel</div>
-                  <div class="video-placeholder-sub">Découpage en classes continues et recodage des facteurs</div>
+                  <div class="video-placeholder-title">
+                    <span data-lang="fr">Démonstration vidéo — Cas 2 : Recodage conditionnel</span>
+                    <span data-lang="en">Video Walkthrough — Case 2: Conditional Recoding</span>
+                  </div>
+                  <div class="video-placeholder-sub">
+                    <span data-lang="fr">Découpage en classes continues et recodage des facteurs</span>
+                    <span data-lang="en">Continuous binning and categorical factor recoding</span>
+                  </div>
                   <a 
                     href="https://github.com/census-specs/hygie" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     class="btn btn-secondary btn-sm"
                     style="background:#ffffff; margin-top:0.4rem;">
-                    Ouvrir le tutoriel vidéo (GitHub)
+                    <span data-lang="fr">Ouvrir le tutoriel vidéo (GitHub)</span>
+                    <span data-lang="en">Open video tutorial (GitHub)</span>
                   </a>
                 </div>
               </div>
               <div class="video-actions-bar">
-                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
-                <span>Durée estimée : 4 min</span>
+                <span>
+                  <span data-lang="fr">Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                  <span data-lang="en">Format: Step-by-step video (Hygie GUI)</span>
+                </span>
+                <span>
+                  <span data-lang="fr">Durée estimée : 4 min</span>
+                  <span data-lang="en">Estimated time: 4 min</span>
+                </span>
               </div>
             </div>
 
             <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
             <div class="data-download-bar" id="case-2-data">
-              <strong>Jeu de données source :</strong>
+              <strong>
+                <span data-lang="fr">Jeu de données source :</span>
+                <span data-lang="en">Source dataset:</span>
+              </strong>
               <a 
                 href="https://github.com/census-specs/hygie/raw/main/data-raw/enquete_demo.xlsx" 
                 class="download-link" 
@@ -1022,7 +1297,10 @@ donnees_sante_propre &lt;- donnees_sante %&gt;%
             </div>
 
             <!-- CODE R GÉNÉRÉ -->
-            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="case-code-title">
+              <span data-lang="fr">Code R produit à la fin de l'exercice :</span>
+              <span data-lang="en">R Code generated at the end of the exercise:</span>
+            </div>
             <div class="code-block-container" id="case2-code-block">
               <div class="code-block-header">
                 <span>R Script (tidyverse)</span>
@@ -1032,7 +1310,8 @@ donnees_sante_propre &lt;- donnees_sante %&gt;%
                   id="copy-case2-btn" 
                   onclick="copyCode('case2-code', 'copy-case2-btn')" 
                   aria-label="Copier le code du Cas 2">
-                  Copier
+                  <span data-lang="fr">Copier</span>
+                  <span data-lang="en">Copy</span>
                 </button>
               </div>
               <pre><code id="case2-code"># Code Tidyverse généré automatiquement par Hygie
@@ -1050,38 +1329,61 @@ enquete_demo_recoded &lt;- enquete_demo %&gt;%
           <!-- CAS 3 -->
           <article class="case-card" id="case-3-card">
             <div class="case-card-header">
-              <h3 id="case-3-title">CAS 3 : Jointure de deux tables de données</h3>
-              <span class="topic-badge" id="case-3-badge">Jointures &amp; Fusion</span>
+              <h3 id="case-3-title">
+                <span data-lang="fr">CAS 3 : Jointure de deux tables de données</span>
+                <span data-lang="en">CASE 3: Joining two datasets (Left Join)</span>
+              </h3>
+              <span class="topic-badge" id="case-3-badge">
+                <span data-lang="fr">Jointures &amp; Fusion</span>
+                <span data-lang="en">Joins &amp; Merges</span>
+              </span>
             </div>
             <p class="case-description" id="case-3-desc">
-              Réaliser une jointure (Left Join) entre un fichier de ventes et un référentiel clients. Hygie détecte les clés communes et vous permet de vérifier immédiatement la complétude de la table résultante.
+              <span data-lang="fr">Réaliser une jointure (Left Join) entre un fichier de ventes et un référentiel clients. Hygie détecte les clés communes et vous permet de vérifier immédiatement la complétude de la table résultante.</span>
+              <span data-lang="en">Perform a Left Join between a sales transaction dataset and a customer master table. Hygie automatically detects common keys and lets you preview output integrity immediately.</span>
             </p>
 
             <!-- CONTENEUR VIDÉO RESPONSIVE -->
             <div class="video-container" id="case-3-video">
               <div class="video-placeholder-box">
                 <div class="video-placeholder-content">
-                  <div class="video-placeholder-title">Démonstration vidéo — Cas 3 : Jointure de tables</div>
-                  <div class="video-placeholder-sub">Association multi-tables et contrôle des correspondances de clés</div>
+                  <div class="video-placeholder-title">
+                    <span data-lang="fr">Démonstration vidéo — Cas 3 : Jointure de tables</span>
+                    <span data-lang="en">Video Walkthrough — Case 3: Table Joins</span>
+                  </div>
+                  <div class="video-placeholder-sub">
+                    <span data-lang="fr">Association multi-tables et contrôle des correspondances de clés</span>
+                    <span data-lang="en">Multi-table association and foreign key matching verification</span>
+                  </div>
                   <a 
                     href="https://github.com/census-specs/hygie" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     class="btn btn-secondary btn-sm"
                     style="background:#ffffff; margin-top:0.4rem;">
-                    Ouvrir le tutoriel vidéo (GitHub)
+                    <span data-lang="fr">Ouvrir le tutoriel vidéo (GitHub)</span>
+                    <span data-lang="en">Open video tutorial (GitHub)</span>
                   </a>
                 </div>
               </div>
               <div class="video-actions-bar">
-                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
-                <span>Durée estimée : 3 min 30</span>
+                <span>
+                  <span data-lang="fr">Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                  <span data-lang="en">Format: Step-by-step video (Hygie GUI)</span>
+                </span>
+                <span>
+                  <span data-lang="fr">Durée estimée : 3 min 30</span>
+                  <span data-lang="en">Estimated time: 3 min 30</span>
+                </span>
               </div>
             </div>
 
             <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
             <div class="data-download-bar" id="case-3-data">
-              <strong>Jeux de données sources :</strong>
+              <strong>
+                <span data-lang="fr">Jeux de données sources :</span>
+                <span data-lang="en">Source datasets:</span>
+              </strong>
               <a 
                 href="https://github.com/census-specs/hygie/raw/main/data-raw/ventes.csv" 
                 class="download-link" 
@@ -1100,7 +1402,10 @@ enquete_demo_recoded &lt;- enquete_demo %&gt;%
             </div>
 
             <!-- CODE R GÉNÉRÉ -->
-            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="case-code-title">
+              <span data-lang="fr">Code R produit à la fin de l'exercice :</span>
+              <span data-lang="en">R Code generated at the end of the exercise:</span>
+            </div>
             <div class="code-block-container" id="case3-code-block">
               <div class="code-block-header">
                 <span>R Script (tidyverse)</span>
@@ -1110,7 +1415,8 @@ enquete_demo_recoded &lt;- enquete_demo %&gt;%
                   id="copy-case3-btn" 
                   onclick="copyCode('case3-code', 'copy-case3-btn')" 
                   aria-label="Copier le code du Cas 3">
-                  Copier
+                  <span data-lang="fr">Copier</span>
+                  <span data-lang="en">Copy</span>
                 </button>
               </div>
               <pre><code id="case3-code"># Code Tidyverse généré automatiquement par Hygie
@@ -1124,38 +1430,61 @@ donnees_consolidees &lt;- ventes %&gt;%
           <!-- CAS 4 -->
           <article class="case-card" id="case-4-card">
             <div class="case-card-header">
-              <h3 id="case-4-title">CAS 4 : Restructuration de table (Pivot / Transposition)</h3>
-              <span class="topic-badge" id="case-4-badge">Restructuration (Tidying)</span>
+              <h3 id="case-4-title">
+                <span data-lang="fr">CAS 4 : Restructuration de table (Pivot large vers long)</span>
+                <span data-lang="en">CASE 4: Data reshaping (Wide to long pivot)</span>
+              </h3>
+              <span class="topic-badge" id="case-4-badge">
+                <span data-lang="fr">Restructuration (Tidying)</span>
+                <span data-lang="en">Data Reshaping</span>
+              </span>
             </div>
             <p class="case-description" id="case-4-desc">
-              Passer d'un format large à un format long (pivot_longer) pour préparer vos données à l'analyse. Sélectionnez les colonnes à pivoter pour restructurer vos séries temporelles en un clic.
+              <span data-lang="fr">Passer d'un format large à un format long (pivot_longer) pour préparer vos données à l'analyse. Sélectionnez les colonnes à pivoter pour restructurer vos séries temporelles en un clic.</span>
+              <span data-lang="en">Reshape from wide to long format (pivot_longer) to prepare your dataset for tidy analysis. Select columns to pivot and restructure longitudinal indicators in a single click.</span>
             </p>
 
             <!-- CONTENEUR VIDÉO RESPONSIVE -->
             <div class="video-container" id="case-4-video">
               <div class="video-placeholder-box">
                 <div class="video-placeholder-content">
-                  <div class="video-placeholder-title">Démonstration vidéo — Cas 4 : Pivot &amp; Format long</div>
-                  <div class="video-placeholder-sub">Transposition des colonnes temporelles pour le standard Tidy Data</div>
+                  <div class="video-placeholder-title">
+                    <span data-lang="fr">Démonstration vidéo — Cas 4 : Pivot &amp; Format long</span>
+                    <span data-lang="en">Video Walkthrough — Case 4: Pivot &amp; Long Format</span>
+                  </div>
+                  <div class="video-placeholder-sub">
+                    <span data-lang="fr">Transposition des colonnes temporelles pour le standard Tidy Data</span>
+                    <span data-lang="en">Reshaping multi-period columns to meet Tidy Data standards</span>
+                  </div>
                   <a 
                     href="https://github.com/census-specs/hygie" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     class="btn btn-secondary btn-sm"
                     style="background:#ffffff; margin-top:0.4rem;">
-                    Ouvrir le tutoriel vidéo (GitHub)
+                    <span data-lang="fr">Ouvrir le tutoriel vidéo (GitHub)</span>
+                    <span data-lang="en">Open video tutorial (GitHub)</span>
                   </a>
                 </div>
               </div>
               <div class="video-actions-bar">
-                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
-                <span>Durée estimée : 3 min</span>
+                <span>
+                  <span data-lang="fr">Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                  <span data-lang="en">Format: Step-by-step video (Hygie GUI)</span>
+                </span>
+                <span>
+                  <span data-lang="fr">Durée estimée : 3 min</span>
+                  <span data-lang="en">Estimated time: 3 min</span>
+                </span>
               </div>
             </div>
 
             <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
             <div class="data-download-bar" id="case-4-data">
-              <strong>Jeu de données source :</strong>
+              <strong>
+                <span data-lang="fr">Jeu de données source :</span>
+                <span data-lang="en">Source dataset:</span>
+              </strong>
               <a 
                 href="https://github.com/census-specs/hygie/raw/main/data-raw/suivi_annuel.rds" 
                 class="download-link" 
@@ -1166,7 +1495,10 @@ donnees_consolidees &lt;- ventes %&gt;%
             </div>
 
             <!-- CODE R GÉNÉRÉ -->
-            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="case-code-title">
+              <span data-lang="fr">Code R produit à la fin de l'exercice :</span>
+              <span data-lang="en">R Code generated at the end of the exercise:</span>
+            </div>
             <div class="code-block-container" id="case4-code-block">
               <div class="code-block-header">
                 <span>R Script (tidyverse)</span>
@@ -1176,7 +1508,8 @@ donnees_consolidees &lt;- ventes %&gt;%
                   id="copy-case4-btn" 
                   onclick="copyCode('case4-code', 'copy-case4-btn')" 
                   aria-label="Copier le code du Cas 4">
-                  Copier
+                  <span data-lang="fr">Copier</span>
+                  <span data-lang="en">Copy</span>
                 </button>
               </div>
               <pre><code id="case4-code"># Code Tidyverse généré automatiquement par Hygie
@@ -1194,38 +1527,61 @@ suivi_long &lt;- suivi_annuel %&gt;%
           <!-- CAS 5 -->
           <article class="case-card" id="case-5-card">
             <div class="case-card-header">
-              <h3 id="case-5-title">CAS 5 : Exportation et récupération du script R Tidyverse</h3>
-              <span class="topic-badge" id="case-5-badge">Export &amp; Reproductibilité</span>
+              <h3 id="case-5-title">
+                <span data-lang="fr">CAS 5 : Exportation et récupération du script R Tidyverse</span>
+                <span data-lang="en">CASE 5: Exporting and retrieving the Tidyverse R script</span>
+              </h3>
+              <span class="topic-badge" id="case-5-badge">
+                <span data-lang="fr">Export &amp; Reproductibilité</span>
+                <span data-lang="en">Export &amp; Reproducibility</span>
+              </span>
             </div>
             <p class="case-description" id="case-5-desc">
-              Exécuter un workflow complet et exporter le script R 100% reproductible généré par Hygie. Copiez l'historique complet des commandes pour documenter votre chaîne de traitement dans un rapport Quarto ou RMarkdown.
+              <span data-lang="fr">Exécuter un workflow complet et exporter le script R 100% reproductible généré par Hygie. Copiez l'historique complet des commandes pour documenter votre chaîne de traitement dans un rapport Quarto ou RMarkdown.</span>
+              <span data-lang="en">Execute an end-to-end data preparation workflow and export the 100% reproducible R script generated by Hygie. Integrate clean transformation pipelines into Quarto or RMarkdown reports.</span>
             </p>
 
             <!-- CONTENEUR VIDÉO RESPONSIVE -->
             <div class="video-container" id="case-5-video">
               <div class="video-placeholder-box">
                 <div class="video-placeholder-content">
-                  <div class="video-placeholder-title">Démonstration vidéo — Cas 5 : Export &amp; Script complet</div>
-                  <div class="video-placeholder-sub">Extraction du pipeline R complet et export vers formats multiples</div>
+                  <div class="video-placeholder-title">
+                    <span data-lang="fr">Démonstration vidéo — Cas 5 : Export &amp; Script complet</span>
+                    <span data-lang="en">Video Walkthrough — Case 5: Complete Script Export</span>
+                  </div>
+                  <div class="video-placeholder-sub">
+                    <span data-lang="fr">Extraction du pipeline R complet et export vers formats multiples</span>
+                    <span data-lang="en">Full R pipeline extraction and multi-format dataset export</span>
+                  </div>
                   <a 
                     href="https://github.com/census-specs/hygie" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     class="btn btn-secondary btn-sm"
                     style="background:#ffffff; margin-top:0.4rem;">
-                    Ouvrir le tutoriel vidéo (GitHub)
+                    <span data-lang="fr">Ouvrir le tutoriel vidéo (GitHub)</span>
+                    <span data-lang="en">Open video tutorial (GitHub)</span>
                   </a>
                 </div>
               </div>
               <div class="video-actions-bar">
-                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
-                <span>Durée estimée : 4 min</span>
+                <span>
+                  <span data-lang="fr">Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                  <span data-lang="en">Format: Step-by-step video (Hygie GUI)</span>
+                </span>
+                <span>
+                  <span data-lang="fr">Durée estimée : 4 min</span>
+                  <span data-lang="en">Estimated time: 4 min</span>
+                </span>
               </div>
             </div>
 
             <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
             <div class="data-download-bar" id="case-5-data">
-              <strong>Jeu de données source :</strong>
+              <strong>
+                <span data-lang="fr">Jeu de données source :</span>
+                <span data-lang="en">Source dataset:</span>
+              </strong>
               <a 
                 href="https://github.com/census-specs/hygie/raw/main/data-raw/exemple_complet.csv" 
                 class="download-link" 
@@ -1236,7 +1592,10 @@ suivi_long &lt;- suivi_annuel %&gt;%
             </div>
 
             <!-- CODE R GÉNÉRÉ -->
-            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="case-code-title">
+              <span data-lang="fr">Code R produit à la fin de l'exercice :</span>
+              <span data-lang="en">R Code generated at the end of the exercise:</span>
+            </div>
             <div class="code-block-container" id="case5-code-block">
               <div class="code-block-header">
                 <span>R Script (tidyverse)</span>
@@ -1246,7 +1605,8 @@ suivi_long &lt;- suivi_annuel %&gt;%
                   id="copy-case5-btn" 
                   onclick="copyCode('case5-code', 'copy-case5-btn')" 
                   aria-label="Copier le code du Cas 5">
-                  Copier
+                  <span data-lang="fr">Copier</span>
+                  <span data-lang="en">Copy</span>
                 </button>
               </div>
               <pre><code id="case5-code"># Pipeline complet généré automatiquement par Hygie
@@ -1266,7 +1626,7 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
       </section>
 
       <!-- ====================================================================
-           SECTION 4 : À PROPOS
+           SECTION 4 : À PROPOS / ABOUT
            ==================================================================== -->
       <section 
         id="panel-propos" 
@@ -1274,16 +1634,23 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
         role="tabpanel" 
         aria-labelledby="tab-btn-propos">
 
-        <h2 id="propos-titre" style="margin-top: 0;">À propos du projet</h2>
+        <h2 id="propos-titre" style="margin-top: 0;">
+          <span data-lang="fr">À propos du projet</span>
+          <span data-lang="en">About the Project</span>
+        </h2>
         <p id="propos-desc">
-          Hygie est développé pour simplifier l'analyse de données et offrir une passerelle intuitive vers l'écosystème R tidyverse.
+          <span data-lang="fr">Hygie est développé pour simplifier l'analyse de données et offrir une passerelle intuitive vers l'écosystème R tidyverse.</span>
+          <span data-lang="en">Hygie is developed to simplify data analysis and provide an intuitive gateway to the R tidyverse ecosystem.</span>
         </p>
 
         <div class="author-info-box" id="author-info-card">
           <table class="author-info-table" id="author-table">
             <tbody>
               <tr>
-                <th scope="row">Développeur</th>
+                <th scope="row">
+                  <span data-lang="fr">Développeur</span>
+                  <span data-lang="en">Developer</span>
+                </th>
                 <td>Pierre Valdeze MBOM MBOM</td>
               </tr>
               <tr>
@@ -1295,14 +1662,22 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
                 <td><a href="https://github.com/census-specs" target="_blank" rel="noopener noreferrer">@census-specs</a></td>
               </tr>
               <tr>
-                <th scope="row">Dépôt</th>
+                <th scope="row">
+                  <span data-lang="fr">Dépôt</span>
+                  <span data-lang="en">Repository</span>
+                </th>
                 <td><a href="https://github.com/census-specs/hygie" target="_blank" rel="noopener noreferrer">github.com/census-specs/hygie</a></td>
               </tr>
             </tbody>
           </table>
 
           <div class="license-note" id="license-box">
-            <strong>Licence :</strong> Ce projet est distribué sous licence libre MIT.
+            <strong>
+              <span data-lang="fr">Licence :</span>
+              <span data-lang="en">License:</span>
+            </strong>
+            <span data-lang="fr"> Ce projet est distribué sous licence libre MIT.</span>
+            <span data-lang="en"> This project is distributed under the open-source MIT License.</span>
           </div>
         </div>
 
@@ -1314,12 +1689,48 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
   <!-- PIED DE PAGE -->
   <footer class="site-footer" id="site-footer">
     <div class="site-container">
-      <p id="footer-text">Hygie &copy; 2026 &mdash; Pierre Valdeze MBOM MBOM. Distribué sous licence MIT.</p>
+      <p id="footer-text">
+        <span data-lang="fr">Hygie &copy; 2026 &mdash; Pierre Valdeze MBOM MBOM. Distribué sous licence MIT.</span>
+        <span data-lang="en">Hygie &copy; 2026 &mdash; Pierre Valdeze MBOM MBOM. Distributed under the MIT License.</span>
+      </p>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT PUR POUR LA GESTION DES ONGLETS ET COPIE -->
+  <!-- JAVASCRIPT PUR POUR LA GESTION DES ONGLETS, LANGUES ET COPIE -->
   <script>
+    /**
+     * Gestion du changement de langue (FR / EN)
+     * @param {string} lang - 'fr' | 'en'
+     */
+    function setLanguage(lang) {
+      if (lang !== 'fr' && lang !== 'en') lang = 'fr';
+      
+      document.documentElement.lang = lang;
+      
+      // Mise à jour des boutons de langue
+      const btnFr = document.getElementById('lang-btn-fr');
+      const btnEn = document.getElementById('lang-btn-en');
+      
+      if (btnFr && btnEn) {
+        if (lang === 'fr') {
+          btnFr.classList.add('active');
+          btnFr.setAttribute('aria-pressed', 'true');
+          btnEn.classList.remove('active');
+          btnEn.setAttribute('aria-pressed', 'false');
+        } else {
+          btnEn.classList.add('active');
+          btnEn.setAttribute('aria-pressed', 'true');
+          btnFr.classList.remove('active');
+          btnFr.setAttribute('aria-pressed', 'false');
+        }
+      }
+
+      // Sauvegarde dans le localStorage si disponible
+      try {
+        localStorage.setItem('hygie_lang', lang);
+      } catch (e) {}
+    }
+
     /**
      * Gestion des onglets sans dépendances externes
      * @param {string} tabName - 'accueil' | 'guide' | 'formation' | 'propos'
@@ -1351,7 +1762,7 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
         }
       });
 
-      // Synchronisation de l'URL hash
+      // Synchronisation du hash d'URL
       if (history.replaceState) {
         history.replaceState(null, '', '#' + tabName);
       }
@@ -1361,7 +1772,7 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
     }
 
     /**
-     * Copie de code dans le presse-papier avec feedback visuel
+     * Copie de code dans le presse-papier avec feedback visuel bilingue
      * @param {string} codeElementId - ID de l'élément <code>
      * @param {string} btnElementId - ID du bouton de copie
      */
@@ -1371,14 +1782,15 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
       if (!codeElement || !btnElement) return;
 
       const text = codeElement.innerText || codeElement.textContent;
+      const isEnglish = document.documentElement.lang === 'en';
       
       navigator.clipboard.writeText(text).then(function() {
-        const originalText = btnElement.innerText;
-        btnElement.innerText = 'Copié !';
+        const originalHtml = btnElement.innerHTML;
+        btnElement.innerText = isEnglish ? 'Copied!' : 'Copié !';
         btnElement.classList.add('copied');
 
         setTimeout(function() {
-          btnElement.innerText = originalText;
+          btnElement.innerHTML = originalHtml;
           btnElement.classList.remove('copied');
         }, 2000);
       }).catch(function(err) {
@@ -1386,21 +1798,190 @@ readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
       });
     }
 
-    // Gestion du hash initial lors du chargement de la page
+    // Initialisation au chargement de la page
     window.addEventListener('DOMContentLoaded', function() {
+      // 1. Détection de la langue enregistrée ou par défaut (FR)
+      try {
+        const savedLang = localStorage.getItem('hygie_lang');
+        if (savedLang === 'en' || savedLang === 'fr') {
+          setLanguage(savedLang);
+        } else {
+          setLanguage('fr');
+        }
+      } catch (e) {
+        setLanguage('fr');
+      }
+
+      // 2. Gestion du hash initial d'URL
       const hash = window.location.hash.replace('#', '');
       if (hash && ['accueil', 'guide', 'formation', 'propos'].includes(hash)) {
         switchTab(hash);
       }
     });
 
-    // Support des boutons précédent/suivant du navigateur
+    // Support des boutons d'historique du navigateur
     window.addEventListener('hashchange', function() {
       const hash = window.location.hash.replace('#', '');
       if (hash && ['accueil', 'guide', 'formation', 'propos'].includes(hash)) {
         switchTab(hash);
       }
     });
+
+    /* ==========================================================================
+       ANIMATION DE FILIGRANE STATISTIQUE & R (CANVAS PUR JAVASCRIPT)
+       ========================================================================== */
+    (function initWatermarkCanvas() {
+      const canvas = document.getElementById('bg-canvas');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d', { alpha: true });
+      if (!ctx) return;
+
+      // Symboles statistiques et R requis
+      const symbols = [
+        { text: '∑', font: 'serif', weight: 'normal' },
+        { text: '{}', font: 'mono', weight: 'bold' },
+        { text: '%>%', font: 'mono', weight: 'bold' },
+        { text: 'R', font: 'serif', weight: 'bold' },
+        { text: 'µ', font: 'serif', weight: 'normal' },
+        { text: 'σ', font: 'serif', weight: 'normal' },
+        { text: 'f(x)', font: 'serif', weight: 'italic' },
+        { text: '<-', font: 'mono', weight: 'bold' },
+        { text: 'β', font: 'serif', weight: 'normal' },
+        { text: 'λ', font: 'serif', weight: 'normal' },
+        { text: 'π', font: 'serif', weight: 'normal' },
+        { text: 'α', font: 'serif', weight: 'normal' },
+        { text: '%>%', font: 'mono', weight: 'bold' },
+        { text: '<-', font: 'mono', weight: 'bold' },
+        { text: '∑', font: 'serif', weight: 'normal' },
+        { text: 'df', font: 'mono', weight: 'normal' }
+      ];
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let dpr = window.devicePixelRatio || 1;
+      let particles = [];
+      let animationFrameId = null;
+      let isVisible = true;
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        dpr = window.devicePixelRatio || 1;
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+
+        initParticles();
+      }
+
+      function initParticles() {
+        particles = [];
+        // Densité calculée selon la taille d'écran pour un effet discret
+        const count = Math.max(18, Math.min(38, Math.floor((width * height) / 45000)));
+
+        for (let i = 0; i < count; i++) {
+          const sym = symbols[Math.floor(Math.random() * symbols.length)];
+          const size = Math.floor(Math.random() * 14) + 16; // 16px à 30px
+          const fontFace = sym.font === 'mono' 
+            ? "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace" 
+            : "Georgia, Cambria, 'Times New Roman', serif";
+
+          particles.push({
+            text: sym.text,
+            font: `${sym.weight} ${size}px ${fontFace}`,
+            size: size,
+            x: Math.random() * width,
+            y: Math.random() * height,
+            // Vitesse verticale extrêmement lente (de bas en haut)
+            speedY: -(Math.random() * 0.22 + 0.12),
+            // Dérive sinusoïdale horizontale
+            waveSpeed: Math.random() * 0.0012 + 0.0006,
+            waveAmp: Math.random() * 22 + 8,
+            seed: Math.random() * 1000,
+            // Opacité ultra-discrète (0.025 à 0.048) en bleu nuit académique
+            opacity: Math.random() * 0.024 + 0.026,
+            // Légère rotation statique ou ultra lente
+            rotation: (Math.random() - 0.5) * 0.2
+          });
+        }
+      }
+
+      let lastTime = performance.now();
+
+      function render(now) {
+        if (!isVisible) {
+          animationFrameId = requestAnimationFrame(render);
+          return;
+        }
+
+        const delta = Math.min(now - lastTime, 100);
+        lastTime = now;
+
+        ctx.clearRect(0, 0, width, height);
+
+        const time = now * 0.001;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+
+          // Mise à jour de la position verticale (vers le haut)
+          p.y += p.speedY * (delta / 16.6);
+
+          // Si la particule sort par le haut, la replacer en bas
+          if (p.y < -40) {
+            p.y = height + 30;
+            p.x = Math.random() * width;
+          }
+
+          // Dérive sinusoïdale fluide
+          const currentX = p.x + Math.sin(time * 0.6 + p.seed) * p.waveAmp;
+
+          // Dessin du symbole
+          ctx.save();
+          ctx.translate(currentX, p.y);
+          if (p.rotation !== 0) {
+            ctx.rotate(p.rotation);
+          }
+
+          ctx.font = p.font;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          
+          // Couleur bleu nuit institutionnelle (#1b365d) avec très faible opacité
+          ctx.fillStyle = `rgba(27, 54, 93, ${p.opacity})`;
+          ctx.fillText(p.text, 0, 0);
+
+          ctx.restore();
+        }
+
+        animationFrameId = requestAnimationFrame(render);
+      }
+
+      // Initialisation
+      resizeCanvas();
+      animationFrameId = requestAnimationFrame(render);
+
+      // Gestionnaires d'événements
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(resizeCanvas, 150);
+      });
+
+      // Pause quand l'onglet n'est pas actif pour économiser la batterie
+      document.addEventListener('visibilitychange', function() {
+        isVisible = !document.hidden;
+        if (isVisible) {
+          lastTime = performance.now();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
