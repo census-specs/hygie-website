@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hygie — Traitement Interactif des Données sous R</title>
+  <meta name="description" content="Site officiel du paquet R Hygie — Outil de préparation et de nettoyage interactif de données sous R inspiré de PowerQuery.">
+  <meta property="og:title" content="Hygie — Traitement Interactif des Données sous R">
+  <meta property="og:description" content="Un outil de préparation et de nettoyage de données inspiré de PowerQuery pour R, avec interface graphique interactive.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES & RESET ACADÉMIQUE / QUARTO-LATEX STYLE
+       ========================================================================== */
+    :root {
+      --bg-page: #fcfcfc;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --color-primary: #1b365d;
+      --color-primary-hover: #12243f;
+      --border-color: #e0e0e0;
+      --border-light: #ececec;
+      --code-bg: #f4f4f6;
+      --badge-bg: #eef2f7;
+      --font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, 'Courier New', Courier, monospace;
+      --max-width: 860px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ==========================================================================
+       TYPOGRAPHIE
+       ========================================================================== */
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      color: var(--color-primary);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    .lead-text {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--color-primary-hover);
+    }
+
+    /* ==========================================================================
+       STRUCTURE DE PAGE & HEADER INSTITUTIONNEL
+       ========================================================================== */
+    .site-container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header.site-header {
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--bg-page);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-title:hover {
+      text-decoration: none;
+      color: var(--color-primary-hover);
+    }
+
+    .brand-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: normal;
+      background: var(--code-bg);
+      color: var(--color-primary);
+      padding: 0.15rem 0.45rem;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+    }
+
+    /* ==========================================================================
+       SYSTÈME D'ONGLETS ÉPURÉ (STYLE ACADÉMIQUE / QUARTO)
+       ========================================================================== */
+    nav.tab-nav {
+      display: flex;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: 1px solid transparent;
+      border-bottom: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.5rem 0.85rem;
+      cursor: pointer;
+      border-radius: 4px 4px 0 0;
+      transition: color 0.15s ease, background-color 0.15s ease;
+      position: relative;
+    }
+
+    .tab-btn:hover {
+      color: var(--color-primary);
+      background-color: var(--code-bg);
+    }
+
+    .tab-btn.active {
+      color: var(--color-primary);
+      font-weight: 600;
+      background-color: var(--bg-page);
+      border-color: var(--border-color) var(--border-color) var(--bg-page) var(--border-color);
+      margin-bottom: -1px;
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--bg-page);
+    }
+
+    /* ==========================================================================
+       CONTENU PRINCIPAL
+       ========================================================================== */
+    main.main-content {
+      flex: 1;
+      padding: 2.5rem 0 3rem 0;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* ==========================================================================
+       BOUTONS D'ACTION ÉPURÉS
+       ========================================================================== */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.5rem 0 2rem 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.55rem 1.1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      line-height: 1.4;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: #ffffff;
+      border: 1px solid var(--color-primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary-hover);
+      border-color: var(--color-primary-hover);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--code-bg);
+      color: var(--color-primary-hover);
+      text-decoration: none;
+    }
+
+    .btn-sm {
+      font-size: 0.84rem;
+      padding: 0.35rem 0.75rem;
+    }
+
+    /* ==========================================================================
+       BLOCS DE CODE & BOUTON DE COPIE (ACADÉMIQUE / QUARTO)
+       ========================================================================== */
+    .code-block-container {
+      position: relative;
+      margin: 1rem 0 1.25rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: var(--code-bg);
+    }
+
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0.85rem;
+      border-bottom: 1px solid var(--border-light);
+      background-color: #ededf1;
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    .copy-btn {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      cursor: pointer;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .copy-btn:hover {
+      background-color: #f8f8fa;
+      border-color: #bbbbbb;
+    }
+
+    .copy-btn.copied {
+      background-color: #e8f3e8;
+      color: #1a661a;
+      border-color: #9ecc9e;
+    }
+
+    pre {
+      padding: 0.85rem 1rem;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #1a1a1a;
+      white-space: pre;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+    }
+
+    p code, li code {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border-light);
+      padding: 0.15em 0.35em;
+      border-radius: 3px;
+      color: #111111;
+    }
+
+    /* ==========================================================================
+       GRILLES & CARTES ÉPURÉES (SANS OMBRE, BORDURE SUBTILE)
+       ========================================================================== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    .feature-card {
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 1.25rem;
+      background-color: #ffffff;
+    }
+
+    .feature-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+      color: var(--color-primary);
+    }
+
+    .feature-card p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ==========================================================================
+       CARTES DE CAS PRATIQUES (SECTION FORMATION)
+       ========================================================================== */
+    .cases-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin: 1.75rem 0;
+    }
+
+    .case-card {
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 1.5rem;
+      background-color: #ffffff;
+    }
+
+    .case-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .case-card-header h3 {
+      margin: 0;
+      font-size: 1.22rem;
+      color: var(--color-primary);
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .topic-badge {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      background-color: var(--badge-bg);
+      color: var(--color-primary);
+      padding: 0.25rem 0.65rem;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .case-description {
+      color: var(--text-main);
+      font-size: 0.96rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    /* CONTENEUR VIDÉO RESPONSIVE LÉGER */
+    .video-container {
+      margin: 1.25rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: var(--code-bg);
+      overflow: hidden;
+    }
+
+    .video-placeholder-box {
+      position: relative;
+      width: 100%;
+      padding-top: 42%;
+      min-height: 180px;
+      background-color: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .video-placeholder-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .video-placeholder-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .video-placeholder-sub {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      max-width: 480px;
+    }
+
+    .video-actions-bar {
+      padding: 0.5rem 0.85rem;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* TÉLÉCHARGEMENT DE JEU DE DONNÉES */
+    .data-download-bar {
+      margin: 1rem 0;
+      padding: 0.75rem 1rem;
+      background-color: #fafafa;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+
+    .data-download-bar strong {
+      color: var(--color-primary);
+      font-size: 0.88rem;
+    }
+
+    .download-link {
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      color: var(--color-primary);
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .download-link:hover {
+      color: var(--color-primary-hover);
+    }
+
+    .case-code-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-top: 1.25rem;
+      margin-bottom: 0.35rem;
+    }
+
+    /* ==========================================================================
+       LISTES ET SÉQUENCES NUMÉROTÉES (GUIDE D'UTILISATION)
+       ========================================================================== */
+    .step-section {
+      margin-bottom: 2rem;
+    }
+
+    .step-section:last-child {
+      margin-bottom: 0;
+    }
+
+    ol.workflow-list {
+      padding-left: 1.3rem;
+      margin: 1rem 0 1.5rem 0;
+    }
+
+    ol.workflow-list li {
+      margin-bottom: 0.8rem;
+      padding-left: 0.35rem;
+      color: var(--text-main);
+    }
+
+    ol.workflow-list li strong {
+      color: var(--color-primary);
+    }
+
+    /* ==========================================================================
+       SECTION À PROPOS & TABLEAU D'INFORMATIONS
+       ========================================================================== */
+    .author-info-box {
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: #ffffff;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .author-info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .author-info-table th,
+    .author-info-table td {
+      padding: 0.5rem 0;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .author-info-table tr:last-child th,
+    .author-info-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .author-info-table th {
+      font-weight: 600;
+      color: var(--color-primary);
+      width: 140px;
+    }
+
+    .license-note {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 1.25rem;
+      padding: 0.85rem 1rem;
+      background-color: var(--code-bg);
+      border-left: 3px solid var(--color-primary);
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer.site-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 1.75rem 0;
+      background-color: var(--bg-page);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: auto;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN
+       ========================================================================== */
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav.tab-nav {
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .tab-btn {
+        flex: 1 1 45%;
+        text-align: center;
+        padding: 0.5rem 0.4rem;
+        font-size: 0.84rem;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      .case-card {
+        padding: 1.15rem;
+      }
+      .author-info-table th {
+        width: 110px;
+      }
+      .data-download-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ==========================================================================
+       PRINT STYLES
+       ========================================================================== */
+    @media print {
+      header.site-header, .btn-group, .copy-btn, nav.tab-nav, .video-container {
+        display: none !important;
+      }
+      .tab-panel {
+        display: block !important;
+        page-break-after: always;
+      }
+      body {
+        background-color: #ffffff;
+        color: #000000;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER INSTITUTIONNEL -->
+  <header class="site-header" id="site-header">
+    <div class="site-container header-inner">
+      <a href="#accueil" class="brand-title" id="brand-link" onclick="switchTab('accueil'); return false;">
+        hygie <span class="brand-badge">R package</span>
+      </a>
+
+      <!-- NAVIGATION PAR ONGLETS (4 ONGLETS) -->
+      <nav class="tab-nav" id="tab-navigation" role="tablist" aria-label="Navigation principale">
+        <button 
+          class="tab-btn active" 
+          id="tab-btn-accueil" 
+          role="tab" 
+          aria-selected="true" 
+          aria-controls="panel-accueil" 
+          onclick="switchTab('accueil')">
+          Accueil
+        </button>
+        <button 
+          class="tab-btn" 
+          id="tab-btn-guide" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="panel-guide" 
+          onclick="switchTab('guide')">
+          Guide d'utilisation
+        </button>
+        <button 
+          class="tab-btn" 
+          id="tab-btn-formation" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="panel-formation" 
+          onclick="switchTab('formation')">
+          Formation &amp; Cas pratiques
+        </button>
+        <button 
+          class="tab-btn" 
+          id="tab-btn-propos" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="panel-propos" 
+          onclick="switchTab('propos')">
+          À propos
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="main-content" id="main-content">
+    <div class="site-container">
+
+      <!-- ====================================================================
+           SECTION 1 : ACCUEIL
+           ==================================================================== -->
+      <section 
+        id="panel-accueil" 
+        class="tab-panel active" 
+        role="tabpanel" 
+        aria-labelledby="tab-btn-accueil">
+        
+        <h1 id="accueil-titre">Hygie — Traitement Interactif des Données sous R</h1>
+        <p class="lead-text" id="accueil-description">
+          Un outil de préparation et de nettoyage de données inspiré de PowerQuery pour R, avec interface graphique interactive.
+        </p>
+
+        <!-- BOUTONS D'ACTION -->
+        <div class="btn-group" id="accueil-actions">
+          <a 
+            href="https://github.com/census-specs/hygie" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn-primary" 
+            id="btn-github">
+            Voir sur GitHub
+          </a>
+          <button 
+            type="button" 
+            class="btn btn-secondary" 
+            id="btn-doc" 
+            onclick="switchTab('guide')">
+            Documentation
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-secondary" 
+            id="btn-formation-hero" 
+            onclick="switchTab('formation')">
+            Cas Pratiques
+          </button>
+        </div>
+
+        <!-- BLOC INSTALLATION RAPIDE -->
+        <h2 id="installation-titre">Installation Rapide</h2>
+        <p>Installez la version de développement directement depuis GitHub via le paquet <code>remotes</code> :</p>
+
+        <div class="code-block-container" id="install-code-block">
+          <div class="code-block-header">
+            <span>R Script</span>
+            <button 
+              type="button" 
+              class="copy-btn" 
+              id="copy-install-btn" 
+              onclick="copyCode('install-code', 'copy-install-btn')" 
+              aria-label="Copier le code d'installation">
+              Copier
+            </button>
+          </div>
+          <pre><code id="install-code">if (!requireNamespace("remotes", quietly = TRUE)) { install.packages("remotes") }
+remotes::install_github("census-specs/hygie")</code></pre>
+        </div>
+
+        <!-- GRILLE DES POINTS CLÉS (2 COLONNES) -->
+        <h2 id="points-cles-titre">Fonctionnalités Clés</h2>
+        <div class="feature-grid" id="points-cles-grid">
+          <div class="feature-card" id="feature-sans-code">
+            <h3>Sans Code</h3>
+            <p>Importez, filtrez, nettoyez et combinez vos données via des fenêtres de dialogue interactives.</p>
+          </div>
+
+          <div class="feature-card" id="feature-reproductible">
+            <h3>Reproductible</h3>
+            <p>Génère automatiquement le code R équivalent respectant les standards de l'écosystème tidyverse.</p>
+          </div>
+
+          <div class="feature-card" id="feature-multiformats">
+            <h3>Multi-formats</h3>
+            <p>Supporte CSV, Excel (.xlsx, .xls), SPSS (.sav), SAS, Stata, JSON et fichiers natifs RDS.</p>
+          </div>
+
+          <div class="feature-card" id="feature-historique">
+            <h3>Historique Dynamique</h3>
+            <p>Visualisez, annulez ou réordonnez chaque étape de transformation pas à pas.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           SECTION 2 : GUIDE D'UTILISATION
+           ==================================================================== -->
+      <section 
+        id="panel-guide" 
+        class="tab-panel" 
+        role="tabpanel" 
+        aria-labelledby="tab-btn-guide">
+
+        <h2 id="guide-titre" style="margin-top: 0;">Mode d'emploi</h2>
+
+        <!-- ÉTAPE 1 -->
+        <div class="step-section" id="step-1-section">
+          <h3 id="step-1-titre">Étape 1 : Lancement de l'application dans R</h3>
+          <p>Après installation, chargez le paquet et lancez l'interface avec la fonction unique :</p>
+          
+          <div class="code-block-container" id="step1-code-block">
+            <div class="code-block-header">
+              <span>R Console</span>
+              <button 
+                type="button" 
+                class="copy-btn" 
+                id="copy-step1-btn" 
+                onclick="copyCode('step1-code', 'copy-step1-btn')" 
+                aria-label="Copier le code de l'étape 1">
+                Copier
+              </button>
+            </div>
+            <pre><code id="step1-code">library(hygie)
+run_hygie()</code></pre>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 2 -->
+        <div class="step-section" id="step-2-section">
+          <h3 id="step-2-titre">Étape 2 : Lancement personnalisé (Optionnel)</h3>
+          <p>Pour lancer l'application sur un port précis sans ouvrir le navigateur externe :</p>
+          
+          <div class="code-block-container" id="step2-code-block">
+            <div class="code-block-header">
+              <span>R Console</span>
+              <button 
+                type="button" 
+                class="copy-btn" 
+                id="copy-step2-btn" 
+                onclick="copyCode('step2-code', 'copy-step2-btn')" 
+                aria-label="Copier le code de l'étape 2">
+                Copier
+              </button>
+            </div>
+            <pre><code id="step2-code">run_hygie(port = 3838, launch.browser = rstudioapi::viewer)</code></pre>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 3 -->
+        <div class="step-section" id="step-3-section">
+          <h3 id="step-3-titre">Étape 3 : Flux de travail dans l'interface</h3>
+          <ol class="workflow-list" id="workflow-steps-list">
+            <li>
+              <strong>Importation :</strong> Choisissez votre fichier depuis le menu dédié.
+            </li>
+            <li>
+              <strong>Nettoyage &amp; Transformation :</strong> Appliquez vos filtres, recodages ou jointures.
+            </li>
+            <li>
+              <strong>Code R &amp; Export :</strong> Consultez l'onglet code généré et exportez le résultat final sous le format désiré.
+            </li>
+          </ol>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           SECTION 3 (NOUVELLE) : FORMATION & CAS PRATIQUES
+           ==================================================================== -->
+      <section 
+        id="panel-formation" 
+        class="tab-panel" 
+        role="tabpanel" 
+        aria-labelledby="tab-btn-formation">
+
+        <h2 id="formation-titre" style="margin-top: 0;">Formation &amp; Cas Pratiques</h2>
+        <p class="lead-text" id="formation-desc">
+          Découvrez comment utiliser Hygie à travers 5 cas pratiques concrets. Téléchargez les jeux de données réels et consultez le script R Tidyverse reproductible généré à la fin de chaque exercice.
+        </p>
+
+        <div class="cases-container" id="cases-list">
+
+          <!-- CAS 1 -->
+          <article class="case-card" id="case-1-card">
+            <div class="case-card-header">
+              <h3 id="case-1-title">CAS 1 : Nettoyage et gestion des valeurs manquantes</h3>
+              <span class="topic-badge" id="case-1-badge">Import &amp; Nettoyage</span>
+            </div>
+            <p class="case-description" id="case-1-desc">
+              Apprenez à supprimer les doublons, traiter les valeurs manquantes (NA) et harmoniser la casse des variables textuelles. Suivez pas à pas la sélection des colonnes et la validation instantanée des transformations.
+            </p>
+
+            <!-- CONTENEUR VIDÉO RESPONSIVE -->
+            <div class="video-container" id="case-1-video">
+              <div class="video-placeholder-box">
+                <div class="video-placeholder-content">
+                  <div class="video-placeholder-title">Démonstration vidéo — Cas 1 : Nettoyage &amp; NA</div>
+                  <div class="video-placeholder-sub">Tutoriel pas-à-pas interactif dans l'interface graphique Hygie</div>
+                  <a 
+                    href="https://github.com/census-specs/hygie" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn btn-secondary btn-sm"
+                    style="background:#ffffff; margin-top:0.4rem;">
+                    Ouvrir le tutoriel vidéo (GitHub)
+                  </a>
+                </div>
+              </div>
+              <div class="video-actions-bar">
+                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                <span>Durée estimée : 3 min</span>
+              </div>
+            </div>
+
+            <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
+            <div class="data-download-bar" id="case-1-data">
+              <strong>Jeu de données source :</strong>
+              <a 
+                href="https://github.com/census-specs/hygie/raw/main/data-raw/donnees_sante.csv" 
+                class="download-link" 
+                id="case-1-download" 
+                download>
+                Télécharger donnees_sante.csv
+              </a>
+            </div>
+
+            <!-- CODE R GÉNÉRÉ -->
+            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="code-block-container" id="case1-code-block">
+              <div class="code-block-header">
+                <span>R Script (tidyverse)</span>
+                <button 
+                  type="button" 
+                  class="copy-btn" 
+                  id="copy-case1-btn" 
+                  onclick="copyCode('case1-code', 'copy-case1-btn')" 
+                  aria-label="Copier le code du Cas 1">
+                  Copier
+                </button>
+              </div>
+              <pre><code id="case1-code">hygie::run_hygie() # Import 'donnees_sante.csv' -&gt; Nettoyage automatique
+
+# Code R équivalent généré :
+library(dplyr)
+library(stringr)
+
+donnees_sante_propre &lt;- donnees_sante %&gt;%
+  distinct() %&gt;%
+  filter(!is.na(id_patient)) %&gt;%
+  mutate(across(where(is.character), ~ str_squish(str_to_title(.x))))</code></pre>
+            </div>
+          </article>
+
+          <!-- CAS 2 -->
+          <article class="case-card" id="case-2-card">
+            <div class="case-card-header">
+              <h3 id="case-2-title">CAS 2 : Recodage et création de variables conditionnelles</h3>
+              <span class="topic-badge" id="case-2-badge">Recodage &amp; Variables</span>
+            </div>
+            <p class="case-description" id="case-2-desc">
+              Transformer des variables continues en tranches d'âge et recoder des modalités spécifiques sans écrire de code. Les règles logiques sont définies visuellement puis automatiquement traduites en syntaxe R standard.
+            </p>
+
+            <!-- CONTENEUR VIDÉO RESPONSIVE -->
+            <div class="video-container" id="case-2-video">
+              <div class="video-placeholder-box">
+                <div class="video-placeholder-content">
+                  <div class="video-placeholder-title">Démonstration vidéo — Cas 2 : Recodage conditionnel</div>
+                  <div class="video-placeholder-sub">Découpage en classes continues et recodage des facteurs</div>
+                  <a 
+                    href="https://github.com/census-specs/hygie" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn btn-secondary btn-sm"
+                    style="background:#ffffff; margin-top:0.4rem;">
+                    Ouvrir le tutoriel vidéo (GitHub)
+                  </a>
+                </div>
+              </div>
+              <div class="video-actions-bar">
+                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                <span>Durée estimée : 4 min</span>
+              </div>
+            </div>
+
+            <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
+            <div class="data-download-bar" id="case-2-data">
+              <strong>Jeu de données source :</strong>
+              <a 
+                href="https://github.com/census-specs/hygie/raw/main/data-raw/enquete_demo.xlsx" 
+                class="download-link" 
+                id="case-2-download" 
+                download>
+                Télécharger enquete_demo.xlsx
+              </a>
+            </div>
+
+            <!-- CODE R GÉNÉRÉ -->
+            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="code-block-container" id="case2-code-block">
+              <div class="code-block-header">
+                <span>R Script (tidyverse)</span>
+                <button 
+                  type="button" 
+                  class="copy-btn" 
+                  id="copy-case2-btn" 
+                  onclick="copyCode('case2-code', 'copy-case2-btn')" 
+                  aria-label="Copier le code du Cas 2">
+                  Copier
+                </button>
+              </div>
+              <pre><code id="case2-code"># Code Tidyverse généré automatiquement par Hygie
+library(dplyr)
+library(forcats)
+
+enquete_demo_recoded &lt;- enquete_demo %&gt;%
+  mutate(
+    tranche_age = cut(age, breaks = c(0, 18, 35, 60, Inf), labels = c("&lt;18", "18-34", "35-59", "60+"), right = FALSE),
+    statut_recode = fct_recode(statut, "Actif" = "Employé", "Inactif" = "Sans emploi")
+  )</code></pre>
+            </div>
+          </article>
+
+          <!-- CAS 3 -->
+          <article class="case-card" id="case-3-card">
+            <div class="case-card-header">
+              <h3 id="case-3-title">CAS 3 : Jointure de deux tables de données</h3>
+              <span class="topic-badge" id="case-3-badge">Jointures &amp; Fusion</span>
+            </div>
+            <p class="case-description" id="case-3-desc">
+              Réaliser une jointure (Left Join) entre un fichier de ventes et un référentiel clients. Hygie détecte les clés communes et vous permet de vérifier immédiatement la complétude de la table résultante.
+            </p>
+
+            <!-- CONTENEUR VIDÉO RESPONSIVE -->
+            <div class="video-container" id="case-3-video">
+              <div class="video-placeholder-box">
+                <div class="video-placeholder-content">
+                  <div class="video-placeholder-title">Démonstration vidéo — Cas 3 : Jointure de tables</div>
+                  <div class="video-placeholder-sub">Association multi-tables et contrôle des correspondances de clés</div>
+                  <a 
+                    href="https://github.com/census-specs/hygie" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn btn-secondary btn-sm"
+                    style="background:#ffffff; margin-top:0.4rem;">
+                    Ouvrir le tutoriel vidéo (GitHub)
+                  </a>
+                </div>
+              </div>
+              <div class="video-actions-bar">
+                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                <span>Durée estimée : 3 min 30</span>
+              </div>
+            </div>
+
+            <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
+            <div class="data-download-bar" id="case-3-data">
+              <strong>Jeux de données sources :</strong>
+              <a 
+                href="https://github.com/census-specs/hygie/raw/main/data-raw/ventes.csv" 
+                class="download-link" 
+                id="case-3-download-1" 
+                download>
+                Télécharger ventes.csv
+              </a>
+              <span style="color: var(--border-color);">&bull;</span>
+              <a 
+                href="https://github.com/census-specs/hygie/raw/main/data-raw/clients.csv" 
+                class="download-link" 
+                id="case-3-download-2" 
+                download>
+                Télécharger clients.csv
+              </a>
+            </div>
+
+            <!-- CODE R GÉNÉRÉ -->
+            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="code-block-container" id="case3-code-block">
+              <div class="code-block-header">
+                <span>R Script (tidyverse)</span>
+                <button 
+                  type="button" 
+                  class="copy-btn" 
+                  id="copy-case3-btn" 
+                  onclick="copyCode('case3-code', 'copy-case3-btn')" 
+                  aria-label="Copier le code du Cas 3">
+                  Copier
+                </button>
+              </div>
+              <pre><code id="case3-code"># Code Tidyverse généré automatiquement par Hygie
+library(dplyr)
+
+donnees_consolidees &lt;- ventes %&gt;%
+  left_join(clients, by = "id_client")</code></pre>
+            </div>
+          </article>
+
+          <!-- CAS 4 -->
+          <article class="case-card" id="case-4-card">
+            <div class="case-card-header">
+              <h3 id="case-4-title">CAS 4 : Restructuration de table (Pivot / Transposition)</h3>
+              <span class="topic-badge" id="case-4-badge">Restructuration (Tidying)</span>
+            </div>
+            <p class="case-description" id="case-4-desc">
+              Passer d'un format large à un format long (pivot_longer) pour préparer vos données à l'analyse. Sélectionnez les colonnes à pivoter pour restructurer vos séries temporelles en un clic.
+            </p>
+
+            <!-- CONTENEUR VIDÉO RESPONSIVE -->
+            <div class="video-container" id="case-4-video">
+              <div class="video-placeholder-box">
+                <div class="video-placeholder-content">
+                  <div class="video-placeholder-title">Démonstration vidéo — Cas 4 : Pivot &amp; Format long</div>
+                  <div class="video-placeholder-sub">Transposition des colonnes temporelles pour le standard Tidy Data</div>
+                  <a 
+                    href="https://github.com/census-specs/hygie" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn btn-secondary btn-sm"
+                    style="background:#ffffff; margin-top:0.4rem;">
+                    Ouvrir le tutoriel vidéo (GitHub)
+                  </a>
+                </div>
+              </div>
+              <div class="video-actions-bar">
+                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                <span>Durée estimée : 3 min</span>
+              </div>
+            </div>
+
+            <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
+            <div class="data-download-bar" id="case-4-data">
+              <strong>Jeu de données source :</strong>
+              <a 
+                href="https://github.com/census-specs/hygie/raw/main/data-raw/suivi_annuel.rds" 
+                class="download-link" 
+                id="case-4-download" 
+                download>
+                Télécharger suivi_annuel.rds
+              </a>
+            </div>
+
+            <!-- CODE R GÉNÉRÉ -->
+            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="code-block-container" id="case4-code-block">
+              <div class="code-block-header">
+                <span>R Script (tidyverse)</span>
+                <button 
+                  type="button" 
+                  class="copy-btn" 
+                  id="copy-case4-btn" 
+                  onclick="copyCode('case4-code', 'copy-case4-btn')" 
+                  aria-label="Copier le code du Cas 4">
+                  Copier
+                </button>
+              </div>
+              <pre><code id="case4-code"># Code Tidyverse généré automatiquement par Hygie
+library(tidyr)
+
+suivi_long &lt;- suivi_annuel %&gt;%
+  pivot_longer(
+    cols = starts_with("mois_"),
+    names_to = "periode",
+    values_to = "mesure"
+  )</code></pre>
+            </div>
+          </article>
+
+          <!-- CAS 5 -->
+          <article class="case-card" id="case-5-card">
+            <div class="case-card-header">
+              <h3 id="case-5-title">CAS 5 : Exportation et récupération du script R Tidyverse</h3>
+              <span class="topic-badge" id="case-5-badge">Export &amp; Reproductibilité</span>
+            </div>
+            <p class="case-description" id="case-5-desc">
+              Exécuter un workflow complet et exporter le script R 100% reproductible généré par Hygie. Copiez l'historique complet des commandes pour documenter votre chaîne de traitement dans un rapport Quarto ou RMarkdown.
+            </p>
+
+            <!-- CONTENEUR VIDÉO RESPONSIVE -->
+            <div class="video-container" id="case-5-video">
+              <div class="video-placeholder-box">
+                <div class="video-placeholder-content">
+                  <div class="video-placeholder-title">Démonstration vidéo — Cas 5 : Export &amp; Script complet</div>
+                  <div class="video-placeholder-sub">Extraction du pipeline R complet et export vers formats multiples</div>
+                  <a 
+                    href="https://github.com/census-specs/hygie" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn btn-secondary btn-sm"
+                    style="background:#ffffff; margin-top:0.4rem;">
+                    Ouvrir le tutoriel vidéo (GitHub)
+                  </a>
+                </div>
+              </div>
+              <div class="video-actions-bar">
+                <span>Format : Vidéo pas-à-pas (Interface Hygie)</span>
+                <span>Durée estimée : 4 min</span>
+              </div>
+            </div>
+
+            <!-- LIEN TÉLÉCHARGEMENT DONNÉES -->
+            <div class="data-download-bar" id="case-5-data">
+              <strong>Jeu de données source :</strong>
+              <a 
+                href="https://github.com/census-specs/hygie/raw/main/data-raw/exemple_complet.csv" 
+                class="download-link" 
+                id="case-5-download" 
+                download>
+                Télécharger exemple_complet.csv
+              </a>
+            </div>
+
+            <!-- CODE R GÉNÉRÉ -->
+            <div class="case-code-title">Code R produit à la fin de l'exercice :</div>
+            <div class="code-block-container" id="case5-code-block">
+              <div class="code-block-header">
+                <span>R Script (tidyverse)</span>
+                <button 
+                  type="button" 
+                  class="copy-btn" 
+                  id="copy-case5-btn" 
+                  onclick="copyCode('case5-code', 'copy-case5-btn')" 
+                  aria-label="Copier le code du Cas 5">
+                  Copier
+                </button>
+              </div>
+              <pre><code id="case5-code"># Pipeline complet généré automatiquement par Hygie
+library(dplyr)
+library(readr)
+
+resultat_final &lt;- exemple_complet %&gt;%
+  filter(!is.na(valeur)) %&gt;%
+  mutate(valeur_log = log(valeur + 1))
+
+readr::write_excel_csv(resultat_final, "donnees_traitees.csv")</code></pre>
+            </div>
+          </article>
+
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           SECTION 4 : À PROPOS
+           ==================================================================== -->
+      <section 
+        id="panel-propos" 
+        class="tab-panel" 
+        role="tabpanel" 
+        aria-labelledby="tab-btn-propos">
+
+        <h2 id="propos-titre" style="margin-top: 0;">À propos du projet</h2>
+        <p id="propos-desc">
+          Hygie est développé pour simplifier l'analyse de données et offrir une passerelle intuitive vers l'écosystème R tidyverse.
+        </p>
+
+        <div class="author-info-box" id="author-info-card">
+          <table class="author-info-table" id="author-table">
+            <tbody>
+              <tr>
+                <th scope="row">Développeur</th>
+                <td>Pierre Valdeze MBOM MBOM</td>
+              </tr>
+              <tr>
+                <th scope="row">Email</th>
+                <td><a href="mailto:pierrembom@outlook.com">pierrembom@outlook.com</a></td>
+              </tr>
+              <tr>
+                <th scope="row">GitHub</th>
+                <td><a href="https://github.com/census-specs" target="_blank" rel="noopener noreferrer">@census-specs</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Dépôt</th>
+                <td><a href="https://github.com/census-specs/hygie" target="_blank" rel="noopener noreferrer">github.com/census-specs/hygie</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="license-note" id="license-box">
+            <strong>Licence :</strong> Ce projet est distribué sous licence libre MIT.
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- PIED DE PAGE -->
+  <footer class="site-footer" id="site-footer">
+    <div class="site-container">
+      <p id="footer-text">Hygie &copy; 2026 &mdash; Pierre Valdeze MBOM MBOM. Distribué sous licence MIT.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT PUR POUR LA GESTION DES ONGLETS ET COPIE -->
+  <script>
+    /**
+     * Gestion des onglets sans dépendances externes
+     * @param {string} tabName - 'accueil' | 'guide' | 'formation' | 'propos'
+     */
+    function switchTab(tabName) {
+      const tabs = ['accueil', 'guide', 'formation', 'propos'];
+      if (!tabs.includes(tabName)) return;
+
+      tabs.forEach(name => {
+        const btn = document.getElementById('tab-btn-' + name);
+        const panel = document.getElementById('panel-' + name);
+
+        if (name === tabName) {
+          if (btn) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+          }
+          if (panel) {
+            panel.classList.add('active');
+          }
+        } else {
+          if (btn) {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+          }
+          if (panel) {
+            panel.classList.remove('active');
+          }
+        }
+      });
+
+      // Synchronisation de l'URL hash
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + tabName);
+      }
+      
+      // Remonter en haut de page de manière fluide
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /**
+     * Copie de code dans le presse-papier avec feedback visuel
+     * @param {string} codeElementId - ID de l'élément <code>
+     * @param {string} btnElementId - ID du bouton de copie
+     */
+    function copyCode(codeElementId, btnElementId) {
+      const codeElement = document.getElementById(codeElementId);
+      const btnElement = document.getElementById(btnElementId);
+      if (!codeElement || !btnElement) return;
+
+      const text = codeElement.innerText || codeElement.textContent;
+      
+      navigator.clipboard.writeText(text).then(function() {
+        const originalText = btnElement.innerText;
+        btnElement.innerText = 'Copié !';
+        btnElement.classList.add('copied');
+
+        setTimeout(function() {
+          btnElement.innerText = originalText;
+          btnElement.classList.remove('copied');
+        }, 2000);
+      }).catch(function(err) {
+        console.error('Erreur lors de la copie :', err);
+      });
+    }
+
+    // Gestion du hash initial lors du chargement de la page
+    window.addEventListener('DOMContentLoaded', function() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && ['accueil', 'guide', 'formation', 'propos'].includes(hash)) {
+        switchTab(hash);
+      }
+    });
+
+    // Support des boutons précédent/suivant du navigateur
+    window.addEventListener('hashchange', function() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && ['accueil', 'guide', 'formation', 'propos'].includes(hash)) {
+        switchTab(hash);
+      }
+    });
+  </script>
+</body>
+</html>

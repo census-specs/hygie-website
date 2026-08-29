@@ -1,0 +1,6 @@
+{
+  "name": "Hygie",
+  "description": "Site officiel du paquet R Hygie — Outil de préparation et de nettoyage interactif de données sous R.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
