@@ -259,18 +259,14 @@
       background-color: #3b82f6;
     }
 
-    html[data-theme="dark"] .toast {
-      box-shadow: 0 6px 20px var(--shadow-color);
-    }
-
 
     /* ==========================================================================
-       SECTION STATISTIQUES
+       SECTION STATISTIQUES (COMPACTE)
        ========================================================================== */
 
     .stats-section {
-      margin: 2.5rem 0;
-      padding: 2rem 0;
+      margin: 2rem 0;
+      padding: 1.5rem 0;
       border-top: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
     }
@@ -278,20 +274,21 @@
     .stats-section h2 {
       text-align: center;
       border-bottom: none;
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
+      font-size: 1.3rem;
     }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
     }
 
     .stat-card {
       text-align: center;
-      padding: 1.5rem 1rem;
+      padding: 0.75rem 0.5rem;
       border: 1px solid var(--border-color);
-      border-radius: 8px;
+      border-radius: 6px;
       background-color: var(--bg-card);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
@@ -299,55 +296,52 @@
     }
 
     .stat-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px var(--shadow-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .stat-number {
       font-family: var(--font-serif);
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--color-primary);
       line-height: 1.2;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.25rem;
     }
 
     .stat-label {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-weight: 500;
-    }
-
-    .stat-icon {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      line-height: 1.3;
     }
 
 
     /* ==========================================================================
-       SECTION TÉMOIGNAGES
+       SECTION TÉMOIGNAGES (SANS EMOJIS, TEXTE SEUL)
        ========================================================================== */
 
     .testimonials-section {
-      margin: 2.5rem 0;
+      margin: 2rem 0;
     }
 
     .testimonials-section h2 {
       text-align: center;
       border-bottom: none;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
     }
 
     .testimonials-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
     }
 
     .testimonial-card {
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
+      border-radius: 6px;
+      padding: 1.25rem;
       background-color: var(--bg-card);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
@@ -356,40 +350,43 @@
     }
 
     .testimonial-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px var(--shadow-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
-    .testimonial-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      background-color: var(--badge-bg);
-      margin-bottom: 1rem;
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: var(--color-primary);
+      opacity: 0.3;
+      position: absolute;
+      top: 0.5rem;
+      left: 0.75rem;
+      line-height: 1;
     }
 
     .testimonial-quote {
       font-style: italic;
       color: var(--text-main);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
     }
 
     .testimonial-author {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       font-weight: 600;
+      padding-left: 1.5rem;
     }
 
     .testimonial-role {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-style: italic;
+      padding-left: 1.5rem;
     }
 
 
@@ -398,19 +395,20 @@
        ========================================================================== */
 
     .faq-section {
-      margin: 2.5rem 0;
+      margin: 2rem 0;
     }
 
     .faq-section h2 {
       text-align: center;
       border-bottom: none;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
     }
 
     .faq-list {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.6rem;
     }
 
     .faq-item {
@@ -424,7 +422,7 @@
 
     .faq-question {
       width: 100%;
-      padding: 1rem 1.25rem;
+      padding: 0.85rem 1rem;
       background: none;
       border: none;
       cursor: pointer;
@@ -432,7 +430,7 @@
       justify-content: space-between;
       align-items: center;
       font-family: var(--font-sans);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--color-primary);
       text-align: left;
@@ -470,8 +468,8 @@
     }
 
     .faq-answer-content {
-      padding: 0 1.25rem 1.25rem 1.25rem;
-      font-size: 0.9rem;
+      padding: 0 1rem 1rem 1rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.7;
     }
@@ -1872,6 +1870,19 @@
 
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .stat-card {
+        padding: 0.5rem 0.35rem;
+      }
+
+      .stat-number {
+        font-size: 1.2rem;
+      }
+
+      .stat-label {
+        font-size: 0.68rem;
       }
 
       .toast-container {
@@ -1882,6 +1893,10 @@
 
       .toast {
         max-width: 100%;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1928,11 +1943,8 @@
       }
 
       .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .testimonials-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
       }
     }
 
@@ -2028,8 +2040,6 @@
 
       <div class="header-controls">
 
-        <!-- NAVIGATION -->
-
         <nav
           class="tab-nav"
           id="tab-navigation"
@@ -2099,8 +2109,6 @@
         </nav>
 
 
-        <!-- BOUTON MODE SOMBRE -->
-
         <button
           type="button"
           class="theme-toggle-btn"
@@ -2125,8 +2133,6 @@
           </svg>
         </button>
 
-
-        <!-- LANGUE -->
 
         <div
           class="lang-switcher"
@@ -2345,69 +2351,6 @@
             </span>
 
           </button>
-
-        </div>
-
-
-        <!-- SECTION STATISTIQUES -->
-
-        <div class="stats-section">
-
-          <h2>
-
-            <span data-lang="fr">
-              Hygie en quelques chiffres
-            </span>
-
-            <span data-lang="en">
-              Hygie in numbers
-            </span>
-
-          </h2>
-
-
-          <div class="stats-grid">
-
-            <div class="stat-card">
-              <div class="stat-icon">📦</div>
-              <div class="stat-number" data-target="8">0</div>
-              <div class="stat-label">
-                <span data-lang="fr">Formats supportés</span>
-                <span data-lang="en">Supported formats</span>
-              </div>
-            </div>
-
-
-            <div class="stat-card">
-              <div class="stat-icon">🛠️</div>
-              <div class="stat-number" data-target="15">0</div>
-              <div class="stat-label">
-                <span data-lang="fr">Opérations disponibles</span>
-                <span data-lang="en">Available operations</span>
-              </div>
-            </div>
-
-
-            <div class="stat-card">
-              <div class="stat-icon">🌍</div>
-              <div class="stat-number" data-target="100">0</div>
-              <div class="stat-label">
-                <span data-lang="fr">% open-source</span>
-                <span data-lang="en">% open-source</span>
-              </div>
-            </div>
-
-
-            <div class="stat-card">
-              <div class="stat-icon">🇨🇲</div>
-              <div class="stat-number" data-target="1">0</div>
-              <div class="stat-label">
-                <span data-lang="fr">Pays d'origine : Cameroun</span>
-                <span data-lang="en">Country of origin: Cameroon</span>
-              </div>
-            </div>
-
-          </div>
 
         </div>
 
@@ -3044,7 +2987,66 @@ remotes::install_github("census-specs/hygie")</code></pre>
         </div>
 
 
-        <!-- SECTION TÉMOIGNAGES -->
+        <!-- SECTION STATISTIQUES (DÉPLACÉE EN BAS AVANT LES TÉMOIGNAGES) -->
+
+        <div class="stats-section">
+
+          <h2>
+
+            <span data-lang="fr">
+              Hygie en quelques chiffres
+            </span>
+
+            <span data-lang="en">
+              Hygie in numbers
+            </span>
+
+          </h2>
+
+
+          <div class="stats-grid">
+
+            <div class="stat-card">
+              <div class="stat-number" data-target="8">0</div>
+              <div class="stat-label">
+                <span data-lang="fr">Formats supportés</span>
+                <span data-lang="en">Supported formats</span>
+              </div>
+            </div>
+
+
+            <div class="stat-card">
+              <div class="stat-number" data-target="15">0</div>
+              <div class="stat-label">
+                <span data-lang="fr">Opérations disponibles</span>
+                <span data-lang="en">Available operations</span>
+              </div>
+            </div>
+
+
+            <div class="stat-card">
+              <div class="stat-number" data-target="100">0</div>
+              <div class="stat-label">
+                <span data-lang="fr">% open-source</span>
+                <span data-lang="en">% open-source</span>
+              </div>
+            </div>
+
+
+            <div class="stat-card">
+              <div class="stat-number" data-target="1">0</div>
+              <div class="stat-label">
+                <span data-lang="fr">Pays d'origine : Cameroun</span>
+                <span data-lang="en">Country of origin: Cameroon</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SECTION TÉMOIGNAGES (SANS EMOJIS, TEXTE SEUL) -->
 
         <div class="testimonials-section">
 
@@ -3064,16 +3066,15 @@ remotes::install_github("census-specs/hygie")</code></pre>
           <div class="testimonials-grid">
 
             <div class="testimonial-card">
-              <div class="testimonial-avatar">👩‍🔬</div>
               <p class="testimonial-quote">
                 <span data-lang="fr">
-                  « Hygie m'a permis de nettoyer mes données d'enquête
+                  Hygie m'a permis de nettoyer mes données d'enquête
                   en quelques minutes au lieu d'une demi-journée.
-                  L'interface est vraiment intuitive. »
+                  L'interface est vraiment intuitive.
                 </span>
                 <span data-lang="en">
-                  "Hygie allowed me to clean my survey data in minutes
-                  instead of half a day. The interface is truly intuitive."
+                  Hygie allowed me to clean my survey data in minutes
+                  instead of half a day. The interface is truly intuitive.
                 </span>
               </p>
               <div class="testimonial-author">
@@ -3088,16 +3089,15 @@ remotes::install_github("census-specs/hygie")</code></pre>
 
 
             <div class="testimonial-card">
-              <div class="testimonial-avatar">👨‍💼</div>
               <p class="testimonial-quote">
                 <span data-lang="fr">
-                  « En tant qu'agro-statisticien, je manipule souvent
+                  En tant qu'agro-statisticien, je manipule souvent
                   des données de production. Hygie me fait gagner
-                  un temps précieux à chaque analyse. »
+                  un temps précieux à chaque analyse.
                 </span>
                 <span data-lang="en">
-                  "As an agro-statistician, I often work with production
-                  data. Hygie saves me valuable time on every analysis."
+                  As an agro-statistician, I often work with production
+                  data. Hygie saves me valuable time on every analysis.
                 </span>
               </p>
               <div class="testimonial-author">
@@ -3112,16 +3112,15 @@ remotes::install_github("census-specs/hygie")</code></pre>
 
 
             <div class="testimonial-card">
-              <div class="testimonial-avatar">👩‍🏫</div>
               <p class="testimonial-quote">
                 <span data-lang="fr">
-                  « J'utilise Hygie pour enseigner la préparation des
+                  J'utilise Hygie pour enseigner la préparation des
                   données à mes étudiants. Le code R généré les aide
-                  à comprendre chaque étape. »
+                  à comprendre chaque étape.
                 </span>
                 <span data-lang="en">
-                  "I use Hygie to teach data preparation to my students.
-                  The generated R code helps them understand each step."
+                  I use Hygie to teach data preparation to my students.
+                  The generated R code helps them understand each step.
                 </span>
               </p>
               <div class="testimonial-author">
@@ -3399,8 +3398,6 @@ remotes::install_github("census-specs/hygie")</code></pre>
         </p>
 
 
-        <!-- ÉTAPE 1 -->
-
         <div class="step-section">
 
           <h3>
@@ -3459,8 +3456,6 @@ run_hygie()</code></pre>
         </div>
 
 
-        <!-- ÉTAPE 2 -->
-
         <div class="step-section">
 
           <h3>
@@ -3511,8 +3506,6 @@ run_hygie()</code></pre>
 
         </div>
 
-
-        <!-- ÉTAPE 3 -->
 
         <div class="step-section">
 
@@ -3677,8 +3670,6 @@ run_hygie()</code></pre>
         </div>
 
 
-        <!-- ÉTAPE 4 -->
-
         <div class="step-section">
 
           <h3>
@@ -3783,7 +3774,6 @@ run_hygie()</code></pre>
 
         <div class="cases-container">
 
-          <!-- CAS 1 -->
           <article class="case-card">
             <div class="case-card-header">
               <h3>
@@ -3839,7 +3829,7 @@ donnees_sante_propre &lt;- donnees_sante %&gt;%
             </div>
           </article>
 
-          <!-- CAS 2 -->
+
           <article class="case-card">
             <div class="case-card-header">
               <h3>
@@ -3893,7 +3883,7 @@ enquete_demo_recoded &lt;- enquete_demo %&gt;%
             </div>
           </article>
 
-          <!-- CAS 3 -->
+
           <article class="case-card">
             <div class="case-card-header">
               <h3>
@@ -3942,7 +3932,7 @@ donnees_consolidees &lt;- ventes %&gt;%
             </div>
           </article>
 
-          <!-- CAS 4 -->
+
           <article class="case-card">
             <div class="case-card-header">
               <h3>
@@ -4042,34 +4032,14 @@ suivi_long &lt;- suivi_annuel %&gt;%
             Développé au Cameroun par Pierre Valdeze MBOM MBOM,
             Hygie est né d'un constat simple : avant de produire
             un graphique, une moyenne ou un modèle statistique,
-            il faut d'abord préparer les données. Cette étape,
-            souvent négligée, peut prendre énormément de temps.
+            il faut d'abord préparer les données.
           </span>
 
           <span data-lang="en">
             Developed in Cameroon by Pierre Valdeze MBOM MBOM,
             Hygie was born from a simple observation: before producing
             a chart, an average or a statistical model, data must first
-            be prepared. This often neglected step can take a lot of time.
-          </span>
-
-        </p>
-
-
-        <p>
-
-          <span data-lang="fr">
-            Hygie vise à rendre ces opérations accessibles à travers
-            une interface graphique tout en restant connecté à
-            l'écosystème R, pour que chacun puisse préparer ses
-            données de manière professionnelle et reproductible.
-          </span>
-
-          <span data-lang="en">
-            Hygie aims to make these operations accessible through
-            a graphical interface while remaining connected to the
-            R ecosystem, so that everyone can prepare their data
-            professionally and reproducibly.
+            be prepared.
           </span>
 
         </p>
@@ -4431,24 +4401,6 @@ suivi_long &lt;- suivi_annuel %&gt;%
           </p>
 
 
-          <p data-lang="fr">
-
-            Cette expérience m'a progressivement conduit à m'intéresser
-            au développement d'outils permettant de rendre les méthodes
-            d'analyse plus accessibles, particulièrement en Afrique francophone.
-
-          </p>
-
-
-          <p data-lang="en">
-
-            This experience gradually led me to develop tools that make
-            data analysis methods more accessible, particularly in
-            French-speaking Africa.
-
-          </p>
-
-
           <h2>
 
             <span data-lang="fr">
@@ -4460,25 +4412,6 @@ suivi_long &lt;- suivi_annuel %&gt;%
             </span>
 
           </h2>
-
-
-          <p data-lang="fr">
-
-            Une grande partie du travail d'analyse se déroule avant même
-            de produire le premier graphique ou de lancer le premier modèle.
-            Il faut d'abord comprendre les données, repérer leurs problèmes,
-            les nettoyer et les organiser.
-
-          </p>
-
-
-          <p data-lang="en">
-
-            Much of the work of data analysis happens before producing
-            the first chart or running the first model. Data first needs
-            to be understood, checked, cleaned and organized.
-
-          </p>
 
 
           <p data-lang="fr">
@@ -4931,7 +4864,7 @@ suivi_long &lt;- suivi_annuel %&gt;%
           if (entry.isIntersecting) {
             const element = entry.target;
             const target = parseInt(element.getAttribute('data-target'));
-            const duration = 2000;
+            const duration = 1500;
             const startTime = performance.now();
             
             function updateNumber(currentTime) {
@@ -4968,12 +4901,10 @@ suivi_long &lt;- suivi_annuel %&gt;%
       
       const isActive = faqItem.classList.contains('active');
       
-      // Fermer tous les autres items
       document.querySelectorAll('.faq-item.active').forEach(item => {
         item.classList.remove('active');
       });
       
-      // Ouvrir ou fermer l'item cliqué
       if (!isActive) {
         faqItem.classList.add('active');
       }
