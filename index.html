@@ -118,7 +118,11 @@
     .video-container,
     .video-actions-bar,
     .author-highlight,
-    .license-note {
+    .license-note,
+    .stat-card,
+    .testimonial-card,
+    .faq-item,
+    .toast {
       transition: 
         background-color 0.3s ease,
         border-color 0.3s ease,
@@ -206,6 +210,270 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+
+    /* ==========================================================================
+       NOTIFICATIONS TOAST
+       ========================================================================== */
+
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .toast {
+      background-color: var(--color-primary);
+      color: #ffffff;
+      padding: 0.85rem 1.25rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 6px 20px var(--shadow-color);
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      max-width: 320px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast-success {
+      background-color: #10b981;
+    }
+
+    .toast-error {
+      background-color: #ef4444;
+    }
+
+    .toast-info {
+      background-color: #3b82f6;
+    }
+
+    html[data-theme="dark"] .toast {
+      box-shadow: 0 6px 20px var(--shadow-color);
+    }
+
+
+    /* ==========================================================================
+       SECTION STATISTIQUES
+       ========================================================================== */
+
+    .stats-section {
+      margin: 2.5rem 0;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stats-section h2 {
+      text-align: center;
+      border-bottom: none;
+      margin-bottom: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px var(--shadow-color);
+    }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+
+    /* ==========================================================================
+       SECTION TÉMOIGNAGES
+       ========================================================================== */
+
+    .testimonials-section {
+      margin: 2.5rem 0;
+    }
+
+    .testimonials-section h2 {
+      text-align: center;
+      border-bottom: none;
+      margin-bottom: 2rem;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .testimonial-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      background-color: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px var(--shadow-color);
+    }
+
+    .testimonial-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background-color: var(--badge-bg);
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-quote {
+      font-style: italic;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-author {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .testimonial-role {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+
+    /* ==========================================================================
+       FAQ ACCORDÉON
+       ========================================================================== */
+
+    .faq-section {
+      margin: 2.5rem 0;
+    }
+
+    .faq-section h2 {
+      text-align: center;
+      border-bottom: none;
+      margin-bottom: 2rem;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background-color: var(--bg-card);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-align: left;
+      transition: background-color 0.2s ease;
+    }
+
+    .faq-question:hover {
+      background-color: rgba(27, 54, 93, 0.04);
+    }
+
+    html[data-theme="dark"] .faq-question:hover {
+      background-color: rgba(96, 165, 250, 0.08);
+    }
+
+    .faq-icon {
+      font-size: 1.25rem;
+      font-weight: 400;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-answer-content {
+      padding: 0 1.25rem 1.25rem 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
     }
 
 
@@ -1601,6 +1869,20 @@
       .img-grid-2 {
         grid-template-columns: 1fr;
       }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .toast-container {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+      }
+
+      .toast {
+        max-width: 100%;
+      }
     }
 
 
@@ -1644,6 +1926,14 @@
       .author-photo-wrapper {
         flex: 0 0 auto;
       }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
 
@@ -1672,7 +1962,8 @@
       .video-container,
       .lang-switcher,
       .theme-toggle-btn,
-      .scroll-progress-bar {
+      .scroll-progress-bar,
+      .toast-container {
         display: none !important;
       }
 
@@ -1694,6 +1985,9 @@
 
   <!-- BARRE DE PROGRESSION -->
   <div class="scroll-progress-bar" id="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- CONTENEUR TOAST -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
 
   <!-- ==========================================================================
        ARRIÈRE-PLAN
@@ -1814,7 +2108,6 @@
           aria-label="Basculer le mode sombre"
           title="Basculer le mode sombre"
         >
-          <!-- Icône soleil (visible en mode sombre) -->
           <svg class="sun-icon" style="display: none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -1827,7 +2120,6 @@
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
           
-          <!-- Icône lune (visible en mode clair) -->
           <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
@@ -1968,8 +2260,6 @@
             class="btn btn-primary"
             id="btn-github">
 
-            <!-- Logo GitHub -->
-
             <svg
               class="github-icon"
               viewBox="0 0 24 24"
@@ -2000,8 +2290,6 @@
             rel="noopener noreferrer"
             class="btn btn-whatsapp"
             id="btn-whatsapp">
-
-            <!-- Logo WhatsApp -->
 
             <svg
               class="whatsapp-icon"
@@ -2057,6 +2345,69 @@
             </span>
 
           </button>
+
+        </div>
+
+
+        <!-- SECTION STATISTIQUES -->
+
+        <div class="stats-section">
+
+          <h2>
+
+            <span data-lang="fr">
+              Hygie en quelques chiffres
+            </span>
+
+            <span data-lang="en">
+              Hygie in numbers
+            </span>
+
+          </h2>
+
+
+          <div class="stats-grid">
+
+            <div class="stat-card">
+              <div class="stat-icon">📦</div>
+              <div class="stat-number" data-target="8">0</div>
+              <div class="stat-label">
+                <span data-lang="fr">Formats supportés</span>
+                <span data-lang="en">Supported formats</span>
+              </div>
+            </div>
+
+
+            <div class="stat-card">
+              <div class="stat-icon">🛠️</div>
+              <div class="stat-number" data-target="15">0</div>
+              <div class="stat-label">
+                <span data-lang="fr">Opérations disponibles</span>
+                <span data-lang="en">Available operations</span>
+              </div>
+            </div>
+
+
+            <div class="stat-card">
+              <div class="stat-icon">🌍</div>
+              <div class="stat-number" data-target="100">0</div>
+              <div class="stat-label">
+                <span data-lang="fr">% open-source</span>
+                <span data-lang="en">% open-source</span>
+              </div>
+            </div>
+
+
+            <div class="stat-card">
+              <div class="stat-icon">🇨🇲</div>
+              <div class="stat-number" data-target="1">0</div>
+              <div class="stat-label">
+                <span data-lang="fr">Pays d'origine : Cameroun</span>
+                <span data-lang="en">Country of origin: Cameroon</span>
+              </div>
+            </div>
+
+          </div>
 
         </div>
 
@@ -2496,9 +2847,6 @@ remotes::install_github("census-specs/hygie")</code></pre>
 
         <div class="feature-grid">
 
-
-          <!-- 1 -->
-
           <div class="feature-card">
 
             <h3>
@@ -2531,8 +2879,6 @@ remotes::install_github("census-specs/hygie")</code></pre>
 
           </div>
 
-
-          <!-- 2 -->
 
           <div class="feature-card">
 
@@ -2567,8 +2913,6 @@ remotes::install_github("census-specs/hygie")</code></pre>
           </div>
 
 
-          <!-- 3 -->
-
           <div class="feature-card">
 
             <h3>
@@ -2602,8 +2946,6 @@ remotes::install_github("census-specs/hygie")</code></pre>
           </div>
 
 
-          <!-- 4 -->
-
           <div class="feature-card">
 
             <h3>
@@ -2634,8 +2976,6 @@ remotes::install_github("census-specs/hygie")</code></pre>
 
           </div>
 
-
-          <!-- 5 -->
 
           <div class="feature-card">
 
@@ -2670,8 +3010,6 @@ remotes::install_github("census-specs/hygie")</code></pre>
           </div>
 
 
-          <!-- 6 -->
-
           <div class="feature-card">
 
             <h3>
@@ -2700,6 +3038,314 @@ remotes::install_github("census-specs/hygie")</code></pre>
               </span>
 
             </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- SECTION TÉMOIGNAGES -->
+
+        <div class="testimonials-section">
+
+          <h2>
+
+            <span data-lang="fr">
+              Ce que disent les utilisateurs
+            </span>
+
+            <span data-lang="en">
+              What users are saying
+            </span>
+
+          </h2>
+
+
+          <div class="testimonials-grid">
+
+            <div class="testimonial-card">
+              <div class="testimonial-avatar">👩‍🔬</div>
+              <p class="testimonial-quote">
+                <span data-lang="fr">
+                  « Hygie m'a permis de nettoyer mes données d'enquête
+                  en quelques minutes au lieu d'une demi-journée.
+                  L'interface est vraiment intuitive. »
+                </span>
+                <span data-lang="en">
+                  "Hygie allowed me to clean my survey data in minutes
+                  instead of half a day. The interface is truly intuitive."
+                </span>
+              </p>
+              <div class="testimonial-author">
+                <span data-lang="fr">Dr. Marie K.</span>
+                <span data-lang="en">Dr. Marie K.</span>
+              </div>
+              <div class="testimonial-role">
+                <span data-lang="fr">Chercheuse en santé publique — Cameroun</span>
+                <span data-lang="en">Public health researcher — Cameroon</span>
+              </div>
+            </div>
+
+
+            <div class="testimonial-card">
+              <div class="testimonial-avatar">👨‍💼</div>
+              <p class="testimonial-quote">
+                <span data-lang="fr">
+                  « En tant qu'agro-statisticien, je manipule souvent
+                  des données de production. Hygie me fait gagner
+                  un temps précieux à chaque analyse. »
+                </span>
+                <span data-lang="en">
+                  "As an agro-statistician, I often work with production
+                  data. Hygie saves me valuable time on every analysis."
+                </span>
+              </p>
+              <div class="testimonial-author">
+                <span data-lang="fr">Jean-Paul N.</span>
+                <span data-lang="en">Jean-Paul N.</span>
+              </div>
+              <div class="testimonial-role">
+                <span data-lang="fr">Agro-statisticien — Yaoundé</span>
+                <span data-lang="en">Agro-statistician — Yaoundé</span>
+              </div>
+            </div>
+
+
+            <div class="testimonial-card">
+              <div class="testimonial-avatar">👩‍🏫</div>
+              <p class="testimonial-quote">
+                <span data-lang="fr">
+                  « J'utilise Hygie pour enseigner la préparation des
+                  données à mes étudiants. Le code R généré les aide
+                  à comprendre chaque étape. »
+                </span>
+                <span data-lang="en">
+                  "I use Hygie to teach data preparation to my students.
+                  The generated R code helps them understand each step."
+                </span>
+              </p>
+              <div class="testimonial-author">
+                <span data-lang="fr">Pr. Sophie T.</span>
+                <span data-lang="en">Pr. Sophie T.</span>
+              </div>
+              <div class="testimonial-role">
+                <span data-lang="fr">Enseignante en statistique — Douala</span>
+                <span data-lang="en">Statistics teacher — Douala</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FAQ -->
+
+        <div class="faq-section">
+
+          <h2>
+
+            <span data-lang="fr">
+              Foire aux questions
+            </span>
+
+            <span data-lang="en">
+              Frequently asked questions
+            </span>
+
+          </h2>
+
+
+          <div class="faq-list">
+
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                <span>
+                  <span data-lang="fr">Hygie est-il gratuit ?</span>
+                  <span data-lang="en">Is Hygie free?</span>
+                </span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  <span data-lang="fr">
+                    Oui, Hygie est totalement gratuit et open-source.
+                    Il est distribué sous licence MIT, ce qui signifie
+                    que vous pouvez l'utiliser, le modifier et le partager
+                    librement, même pour un usage commercial.
+                  </span>
+                  <span data-lang="en">
+                    Yes, Hygie is completely free and open-source.
+                    It is distributed under the MIT license, meaning
+                    you can use, modify and share it freely, even for
+                    commercial purposes.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                <span>
+                  <span data-lang="fr">Dois-je savoir programmer en R pour utiliser Hygie ?</span>
+                  <span data-lang="en">Do I need to know R programming to use Hygie?</span>
+                </span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  <span data-lang="fr">
+                    Non, Hygie est conçu pour être accessible même si vous
+                    ne maîtrisez pas R. L'interface graphique vous guide
+                    à travers chaque étape. Cependant, si vous connaissez R,
+                    vous apprécierez le code généré automatiquement que vous
+                    pouvez réutiliser dans vos propres scripts.
+                  </span>
+                  <span data-lang="en">
+                    No, Hygie is designed to be accessible even if you
+                    don't master R. The graphical interface guides you
+                    through each step. However, if you know R, you'll
+                    appreciate the automatically generated code that you
+                    can reuse in your own scripts.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                <span>
+                  <span data-lang="fr">Quels formats de fichiers Hygie peut-il lire ?</span>
+                  <span data-lang="en">What file formats can Hygie read?</span>
+                </span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  <span data-lang="fr">
+                    Hygie prend en charge les formats les plus courants :
+                    CSV, Excel (.xlsx, .xls), SPSS (.sav), SAS (.sas7bdat),
+                    Stata (.dta), JSON et RDS. Vous pouvez importer vos
+                    données quel que soit leur format d'origine.
+                  </span>
+                  <span data-lang="en">
+                    Hygie supports the most common formats: CSV, Excel
+                    (.xlsx, .xls), SPSS (.sav), SAS (.sas7bdat), Stata (.dta),
+                    JSON and RDS. You can import your data regardless of
+                    its original format.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                <span>
+                  <span data-lang="fr">Hygie fonctionne-t-il sur Windows, Mac et Linux ?</span>
+                  <span data-lang="en">Does Hygie work on Windows, Mac and Linux?</span>
+                </span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  <span data-lang="fr">
+                    Oui, Hygie fonctionne sur tous les systèmes
+                    d'exploitation où R est disponible : Windows, macOS
+                    et Linux. Il suffit d'avoir R installé (version 4.0
+                    ou supérieure recommandée).
+                  </span>
+                  <span data-lang="en">
+                    Yes, Hygie works on all operating systems where R is
+                    available: Windows, macOS and Linux. You just need to
+                    have R installed (version 4.0 or higher recommended).
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                <span>
+                  <span data-lang="fr">Où Hygie a-t-il été développé ?</span>
+                  <span data-lang="en">Where was Hygie developed?</span>
+                </span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  <span data-lang="fr">
+                    Hygie a été développé au Cameroun par Pierre Valdeze
+                    MBOM MBOM, ingénieur agro-statisticien. C'est un projet
+                    open-source qui vise à rendre la préparation des données
+                    accessible à tous, particulièrement en Afrique francophone.
+                  </span>
+                  <span data-lang="en">
+                    Hygie was developed in Cameroon by Pierre Valdeze
+                    MBOM MBOM, an agro-statistician engineer. It is an
+                    open-source project aimed at making data preparation
+                    accessible to everyone, particularly in French-speaking Africa.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                <span>
+                  <span data-lang="fr">Puis-je contribuer au projet ?</span>
+                  <span data-lang="en">Can I contribute to the project?</span>
+                </span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  <span data-lang="fr">
+                    Absolument ! Hygie est un projet open-source hébergé
+                    sur GitHub. Vous pouvez signaler des bugs, proposer
+                    des améliorations, traduire l'interface ou contribuer
+                    au code. Toute contribution est bienvenue.
+                  </span>
+                  <span data-lang="en">
+                    Absolutely! Hygie is an open-source project hosted on
+                    GitHub. You can report bugs, suggest improvements,
+                    translate the interface or contribute code. All
+                    contributions are welcome.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFaq(this)">
+                <span>
+                  <span data-lang="fr">Comment obtenir de l'aide si je rencontre un problème ?</span>
+                  <span data-lang="en">How can I get help if I encounter a problem?</span>
+                </span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  <span data-lang="fr">
+                    Vous pouvez ouvrir une issue sur le dépôt GitHub,
+                    contacter le développeur par email à pierrembom@outlook.com
+                    ou via WhatsApp au +237 698 38 90 30. La communauté
+                    est également active sur GitHub.
+                  </span>
+                  <span data-lang="en">
+                    You can open an issue on the GitHub repository,
+                    contact the developer by email at pierrembom@outlook.com
+                    or via WhatsApp at +237 698 38 90 30. The community is
+                    also active on GitHub.
+                  </span>
+                </div>
+              </div>
+            </div>
 
           </div>
 
@@ -2846,8 +3492,6 @@ run_hygie()</code></pre>
 
           </p>
 
-
-          <!-- IMAGE IMPORT DANS LE GUIDE -->
 
           <div class="img-container">
             <img
@@ -3014,8 +3658,6 @@ run_hygie()</code></pre>
           </ol>
 
 
-          <!-- IMAGE TRANSFORMATION DANS LE GUIDE -->
-
           <div class="img-container">
             <img
               src="Images/hygie-transformation.png"
@@ -3128,16 +3770,12 @@ run_hygie()</code></pre>
           <span data-lang="fr">
             Ces exercices montrent concrètement comment Hygie peut
             être utilisé sur des situations courantes de préparation
-            des données. L'objectif n'est pas seulement d'obtenir
-            un fichier propre, mais de comprendre les différentes
-            étapes qui permettent d'y parvenir.
+            des données.
           </span>
 
           <span data-lang="en">
             These exercises show how Hygie can be used in common
-            data preparation situations. The goal is not only to
-            obtain a clean dataset, but also to understand the
-            different steps used to get there.
+            data preparation situations.
           </span>
 
         </p>
@@ -3145,210 +3783,47 @@ run_hygie()</code></pre>
 
         <div class="cases-container">
 
-
-          <!-- ==================================================================
-               CAS 1
-               ================================================================== -->
-
+          <!-- CAS 1 -->
           <article class="case-card">
-
             <div class="case-card-header">
-
               <h3>
-
-                <span data-lang="fr">
-                  Cas 1 : Nettoyer un fichier contenant des erreurs
-                </span>
-
-                <span data-lang="en">
-                  Case 1: Cleaning a dataset containing errors
-                </span>
-
+                <span data-lang="fr">Cas 1 : Nettoyer un fichier contenant des erreurs</span>
+                <span data-lang="en">Case 1: Cleaning a dataset containing errors</span>
               </h3>
-
-
               <span class="topic-badge">
-
-                <span data-lang="fr">
-                  Nettoyage
-                </span>
-
-                <span data-lang="en">
-                  Cleaning
-                </span>
-
+                <span data-lang="fr">Nettoyage</span>
+                <span data-lang="en">Cleaning</span>
               </span>
-
             </div>
-
-
             <p class="case-description">
-
               <span data-lang="fr">
                 Un fichier peut contenir plusieurs fois la même personne,
-                des informations absentes ou des différences de saisie
-                comme « homme », « Homme » ou « HOMME ». Hygie permet
-                d'identifier ces problèmes et de les corriger avant
-                de poursuivre l'analyse.
+                des informations absentes ou des différences de saisie.
+                Hygie permet d'identifier ces problèmes et de les corriger.
               </span>
-
               <span data-lang="en">
                 A dataset may contain duplicate records, missing
-                information or inconsistent entries such as
-                "male", "Male" or "MALE". Hygie helps identify
-                and correct these problems before analysis.
+                information or inconsistent entries. Hygie helps identify
+                and correct these problems.
               </span>
-
             </p>
-
-
-            <div class="video-container">
-
-              <div class="video-placeholder-box">
-
-                <div class="video-placeholder-content">
-
-                  <div class="video-placeholder-title">
-
-                    <span data-lang="fr">
-                      Démonstration vidéo — Nettoyage
-                    </span>
-
-                    <span data-lang="en">
-                      Video walkthrough — Cleaning
-                    </span>
-
-                  </div>
-
-
-                  <div class="video-placeholder-sub">
-
-                    <span data-lang="fr">
-                      Découvrez étape par étape comment préparer
-                      un fichier avant son analyse.
-                    </span>
-
-                    <span data-lang="en">
-                      Learn step by step how to prepare a dataset
-                      before analysis.
-                    </span>
-
-                  </div>
-
-
-                  <a
-                    href="https://github.com/census-specs/hygie"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-secondary btn-sm">
-
-                    <span data-lang="fr">
-                      Voir le projet sur GitHub
-                    </span>
-
-                    <span data-lang="en">
-                      View the project on GitHub
-                    </span>
-
-                  </a>
-
-                </div>
-
-              </div>
-
-
-              <div class="video-actions-bar">
-
-                <span>
-
-                  <span data-lang="fr">
-                    Tutoriel pas-à-pas
-                  </span>
-
-                  <span data-lang="en">
-                    Step-by-step tutorial
-                  </span>
-
-                </span>
-
-
-                <span>
-
-                  <span data-lang="fr">
-                    Environ 3 min
-                  </span>
-
-                  <span data-lang="en">
-                    About 3 min
-                  </span>
-
-                </span>
-
-              </div>
-
-            </div>
-
-
             <div class="data-download-bar">
-
               <strong>
-
-                <span data-lang="fr">
-                  Jeu de données :
-                </span>
-
-                <span data-lang="en">
-                  Dataset:
-                </span>
-
+                <span data-lang="fr">Jeu de données :</span>
+                <span data-lang="en">Dataset:</span>
               </strong>
-
-
-              <a
-                href="https://github.com/census-specs/hygie/raw/main/data-raw/donnees_sante.csv"
-                class="download-link"
-                download>
-
+              <a href="https://github.com/census-specs/hygie/raw/main/data-raw/donnees_sante.csv" class="download-link" download>
                 donnees_sante.csv
-
               </a>
-
             </div>
-
-
-            <div class="case-code-title">
-
-              <span data-lang="fr">
-                Exemple de code R obtenu :
-              </span>
-
-              <span data-lang="en">
-                Example of generated R code:
-              </span>
-
-            </div>
-
-
             <div class="code-block-container">
-
               <div class="code-block-header">
-
                 <span>R Script</span>
-
-                <button
-                  type="button"
-                  class="copy-btn"
-                  id="copy-case1-btn"
-                  onclick="copyCode('case1-code', 'copy-case1-btn')">
-
+                <button type="button" class="copy-btn" onclick="copyCode('case1-code', 'copy-case1-btn')" id="copy-case1-btn">
                   <span data-lang="fr">Copier</span>
                   <span data-lang="en">Copy</span>
-
                 </button>
-
               </div>
-
-
               <pre><code id="case1-code">library(dplyr)
 library(stringr)
 
@@ -3361,129 +3836,48 @@ donnees_sante_propre &lt;- donnees_sante %&gt;%
       ~ str_squish(str_to_title(.x))
     )
   )</code></pre>
-
             </div>
-
           </article>
 
-
-          <!-- ==================================================================
-               CAS 2
-               ================================================================== -->
-
+          <!-- CAS 2 -->
           <article class="case-card">
-
             <div class="case-card-header">
-
               <h3>
-
-                <span data-lang="fr">
-                  Cas 2 : Créer de nouvelles catégories
-                </span>
-
-                <span data-lang="en">
-                  Case 2: Creating new categories
-                </span>
-
+                <span data-lang="fr">Cas 2 : Créer de nouvelles catégories</span>
+                <span data-lang="en">Case 2: Creating new categories</span>
               </h3>
-
-
               <span class="topic-badge">
-
-                <span data-lang="fr">
-                  Transformation
-                </span>
-
-                <span data-lang="en">
-                  Transformation
-                </span>
-
+                <span data-lang="fr">Transformation</span>
+                <span data-lang="en">Transformation</span>
               </span>
-
             </div>
-
-
             <p class="case-description">
-
               <span data-lang="fr">
-                Une variable comme l'âge contient parfois des valeurs
-                numériques difficiles à présenter directement.
-                Vous pouvez par exemple transformer 17, 25 ou 63 ans
-                en catégories « moins de 18 ans », « 18–34 ans »,
-                « 35–59 ans » et « 60 ans ou plus ».
+                Transformez des valeurs numériques en catégories
+                plus faciles à analyser.
               </span>
-
               <span data-lang="en">
-                A variable such as age may contain numerical values
-                that are difficult to present directly.
-                You can transform values such as 17, 25 or 63
-                into categories such as "under 18", "18–34",
-                "35–59" and "60 or older".
+                Transform numerical values into categories that are
+                easier to analyze.
               </span>
-
             </p>
-
-
             <div class="data-download-bar">
-
               <strong>
-
-                <span data-lang="fr">
-                  Jeu de données :
-                </span>
-
-                <span data-lang="en">
-                  Dataset:
-                </span>
-
+                <span data-lang="fr">Jeu de données :</span>
+                <span data-lang="en">Dataset:</span>
               </strong>
-
-
-              <a
-                href="https://github.com/census-specs/hygie/raw/main/data-raw/enquete_demo.xlsx"
-                class="download-link"
-                download>
-
+              <a href="https://github.com/census-specs/hygie/raw/main/data-raw/enquete_demo.xlsx" class="download-link" download>
                 enquete_demo.xlsx
-
               </a>
-
             </div>
-
-
-            <div class="case-code-title">
-
-              <span data-lang="fr">
-                Exemple de code R obtenu :
-              </span>
-
-              <span data-lang="en">
-                Example of generated R code:
-              </span>
-
-            </div>
-
-
             <div class="code-block-container">
-
               <div class="code-block-header">
-
                 <span>R Script</span>
-
-                <button
-                  type="button"
-                  class="copy-btn"
-                  id="copy-case2-btn"
-                  onclick="copyCode('case2-code', 'copy-case2-btn')">
-
+                <button type="button" class="copy-btn" onclick="copyCode('case2-code', 'copy-case2-btn')" id="copy-case2-btn">
                   <span data-lang="fr">Copier</span>
                   <span data-lang="en">Copy</span>
-
                 </button>
-
               </div>
-
-
               <pre><code id="case2-code">library(dplyr)
 library(forcats)
 
@@ -3494,149 +3888,50 @@ enquete_demo_recoded &lt;- enquete_demo %&gt;%
       breaks = c(0, 18, 35, 60, Inf),
       labels = c("&lt;18", "18-34", "35-59", "60+"),
       right = FALSE
-    ),
-    statut_recode = fct_recode(
-      statut,
-      "Actif" = "Employé",
-      "Inactif" = "Sans emploi"
     )
   )</code></pre>
-
             </div>
-
           </article>
 
-
-          <!-- ==================================================================
-               CAS 3
-               ================================================================== -->
-
+          <!-- CAS 3 -->
           <article class="case-card">
-
             <div class="case-card-header">
-
               <h3>
-
-                <span data-lang="fr">
-                  Cas 3 : Réunir deux fichiers
-                </span>
-
-                <span data-lang="en">
-                  Case 3: Combining two datasets
-                </span>
-
+                <span data-lang="fr">Cas 3 : Réunir deux fichiers</span>
+                <span data-lang="en">Case 3: Combining two datasets</span>
               </h3>
-
-
               <span class="topic-badge">
-
-                <span data-lang="fr">
-                  Fusion
-                </span>
-
-                <span data-lang="en">
-                  Joining
-                </span>
-
+                <span data-lang="fr">Fusion</span>
+                <span data-lang="en">Joining</span>
               </span>
-
             </div>
-
-
             <p class="case-description">
-
               <span data-lang="fr">
-                Imaginez un fichier contenant les ventes et un autre
-                contenant les informations sur les clients.
-                Les deux fichiers possèdent un identifiant commun.
-                Hygie permet de les réunir afin d'obtenir une seule
-                table contenant les informations nécessaires.
+                Réunissez deux fichiers partageant un identifiant commun
+                en une seule table.
               </span>
-
               <span data-lang="en">
-                Imagine a dataset containing sales and another
-                containing customer information.
-                Both datasets share a common identifier.
-                Hygie lets you combine them into a single table
-                containing the information you need.
+                Combine two datasets sharing a common identifier into
+                a single table.
               </span>
-
             </p>
-
-
             <div class="data-download-bar">
-
               <strong>
-
-                <span data-lang="fr">
-                  Fichiers :
-                </span>
-
-                <span data-lang="en">
-                  Files:
-                </span>
-
+                <span data-lang="fr">Fichiers :</span>
+                <span data-lang="en">Files:</span>
               </strong>
-
-
-              <a
-                href="https://github.com/census-specs/hygie/raw/main/data-raw/ventes.csv"
-                class="download-link"
-                download>
-
-                ventes.csv
-
-              </a>
-
-
+              <a href="https://github.com/census-specs/hygie/raw/main/data-raw/ventes.csv" class="download-link" download>ventes.csv</a>
               <span>•</span>
-
-
-              <a
-                href="https://github.com/census-specs/hygie/raw/main/data-raw/clients.csv"
-                class="download-link"
-                download>
-
-                clients.csv
-
-              </a>
-
+              <a href="https://github.com/census-specs/hygie/raw/main/data-raw/clients.csv" class="download-link" download>clients.csv</a>
             </div>
-
-
-            <div class="case-code-title">
-
-              <span data-lang="fr">
-                Exemple de code R obtenu :
-              </span>
-
-              <span data-lang="en">
-                Example of generated R code:
-              </span>
-
-            </div>
-
-
             <div class="code-block-container">
-
               <div class="code-block-header">
-
                 <span>R Script</span>
-
-                <button
-                  type="button"
-                  class="copy-btn"
-                  id="copy-case3-btn"
-                  onclick="copyCode('case3-code', 'copy-case3-btn')">
-
+                <button type="button" class="copy-btn" onclick="copyCode('case3-code', 'copy-case3-btn')" id="copy-case3-btn">
                   <span data-lang="fr">Copier</span>
                   <span data-lang="en">Copy</span>
-
                 </button>
-
               </div>
-
-
               <pre><code id="case3-code">library(dplyr)
 
 donnees_consolidees &lt;- ventes %&gt;%
@@ -3644,128 +3939,48 @@ donnees_consolidees &lt;- ventes %&gt;%
     clients,
     by = "id_client"
   )</code></pre>
-
             </div>
-
           </article>
 
-
-          <!-- ==================================================================
-               CAS 4
-               ================================================================== -->
-
+          <!-- CAS 4 -->
           <article class="case-card">
-
             <div class="case-card-header">
-
               <h3>
-
-                <span data-lang="fr">
-                  Cas 4 : Réorganiser un tableau
-                </span>
-
-                <span data-lang="en">
-                  Case 4: Reshaping a table
-                </span>
-
+                <span data-lang="fr">Cas 4 : Réorganiser un tableau</span>
+                <span data-lang="en">Case 4: Reshaping a table</span>
               </h3>
-
-
               <span class="topic-badge">
-
-                <span data-lang="fr">
-                  Restructuration
-                </span>
-
-                <span data-lang="en">
-                  Reshaping
-                </span>
-
+                <span data-lang="fr">Restructuration</span>
+                <span data-lang="en">Reshaping</span>
               </span>
-
             </div>
-
-
             <p class="case-description">
-
               <span data-lang="fr">
-                Les données sont parfois organisées avec une colonne
-                pour janvier, une autre pour février, une autre pour mars,
-                etc. Hygie permet de transformer ce tableau en une
-                structure plus facile à analyser, où chaque période
-                devient une ligne.
+                Transformez un tableau large en structure longue,
+                plus facile à analyser.
               </span>
-
               <span data-lang="en">
-                Data is sometimes organized with one column for January,
-                another for February, another for March, and so on.
-                Hygie can transform this table into a structure that
-                is easier to analyze, with each period becoming a row.
+                Transform a wide table into a long structure that is
+                easier to analyze.
               </span>
-
             </p>
-
-
             <div class="data-download-bar">
-
               <strong>
-
-                <span data-lang="fr">
-                  Jeu de données :
-                </span>
-
-                <span data-lang="en">
-                  Dataset:
-                </span>
-
+                <span data-lang="fr">Jeu de données :</span>
+                <span data-lang="en">Dataset:</span>
               </strong>
-
-
-              <a
-                href="https://github.com/census-specs/hygie/raw/main/data-raw/suivi_annuel.rds"
-                class="download-link"
-                download>
-
+              <a href="https://github.com/census-specs/hygie/raw/main/data-raw/suivi_annuel.rds" class="download-link" download>
                 suivi_annuel.rds
-
               </a>
-
             </div>
-
-
-            <div class="case-code-title">
-
-              <span data-lang="fr">
-                Exemple de code R obtenu :
-              </span>
-
-              <span data-lang="en">
-                Example of generated R code:
-              </span>
-
-            </div>
-
-
             <div class="code-block-container">
-
               <div class="code-block-header">
-
                 <span>R Script</span>
-
-                <button
-                  type="button"
-                  class="copy-btn"
-                  id="copy-case4-btn"
-                  onclick="copyCode('case4-code', 'copy-case4-btn')">
-
+                <button type="button" class="copy-btn" onclick="copyCode('case4-code', 'copy-case4-btn')" id="copy-case4-btn">
                   <span data-lang="fr">Copier</span>
                   <span data-lang="en">Copy</span>
-
                 </button>
-
               </div>
-
-
               <pre><code id="case4-code">library(tidyr)
 
 suivi_long &lt;- suivi_annuel %&gt;%
@@ -3774,145 +3989,7 @@ suivi_long &lt;- suivi_annuel %&gt;%
     names_to = "periode",
     values_to = "mesure"
   )</code></pre>
-
             </div>
-
-          </article>
-
-
-          <!-- ==================================================================
-               CAS 5
-               ================================================================== -->
-
-          <article class="case-card">
-
-            <div class="case-card-header">
-
-              <h3>
-
-                <span data-lang="fr">
-                  Cas 5 : Conserver et réutiliser son travail
-                </span>
-
-                <span data-lang="en">
-                  Case 5: Save and reuse your work
-                </span>
-
-              </h3>
-
-
-              <span class="topic-badge">
-
-                <span data-lang="fr">
-                  Reproductibilité
-                </span>
-
-                <span data-lang="en">
-                  Reproducibility
-                </span>
-
-              </span>
-
-            </div>
-
-
-            <p class="case-description">
-
-              <span data-lang="fr">
-                Le nettoyage d'un fichier ne devrait pas être une opération
-                impossible à refaire. Hygie permet de conserver les étapes
-                de votre travail et de récupérer le code R correspondant.
-                Vous pouvez ensuite réutiliser ce code dans un script,
-                un rapport Quarto ou un document R Markdown.
-              </span>
-
-              <span data-lang="en">
-                Data cleaning should not be a one-time operation that
-                cannot be repeated. Hygie keeps track of your workflow
-                and lets you retrieve the corresponding R code.
-                You can then reuse it in an R script, Quarto report
-                or R Markdown document.
-              </span>
-
-            </p>
-
-
-            <div class="data-download-bar">
-
-              <strong>
-
-                <span data-lang="fr">
-                  Jeu de données :
-                </span>
-
-                <span data-lang="en">
-                  Dataset:
-                </span>
-
-              </strong>
-
-
-              <a
-                href="https://github.com/census-specs/hygie/raw/main/data-raw/exemple_complet.csv"
-                class="download-link"
-                download>
-
-                exemple_complet.csv
-
-              </a>
-
-            </div>
-
-
-            <div class="case-code-title">
-
-              <span data-lang="fr">
-                Exemple de code R obtenu :
-              </span>
-
-              <span data-lang="en">
-                Example of generated R code:
-              </span>
-
-            </div>
-
-
-            <div class="code-block-container">
-
-              <div class="code-block-header">
-
-                <span>R Script</span>
-
-                <button
-                  type="button"
-                  class="copy-btn"
-                  id="copy-case5-btn"
-                  onclick="copyCode('case5-code', 'copy-case5-btn')">
-
-                  <span data-lang="fr">Copier</span>
-                  <span data-lang="en">Copy</span>
-
-                </button>
-
-              </div>
-
-
-              <pre><code id="case5-code">library(dplyr)
-library(readr)
-
-resultat_final &lt;- exemple_complet %&gt;%
-  filter(!is.na(valeur)) %&gt;%
-  mutate(
-    valeur_log = log(valeur + 1)
-  )
-
-readr::write_excel_csv(
-  resultat_final,
-  "donnees_traitees.csv"
-)</code></pre>
-
-            </div>
-
           </article>
 
         </div>
@@ -3962,15 +4039,18 @@ readr::write_excel_csv(
         <p>
 
           <span data-lang="fr">
-            Avant de produire un graphique, une moyenne, un modèle
-            statistique ou une analyse, il faut généralement commencer
-            par une étape beaucoup moins visible : préparer les données.
+            Développé au Cameroun par Pierre Valdeze MBOM MBOM,
+            Hygie est né d'un constat simple : avant de produire
+            un graphique, une moyenne ou un modèle statistique,
+            il faut d'abord préparer les données. Cette étape,
+            souvent négligée, peut prendre énormément de temps.
           </span>
 
           <span data-lang="en">
-            Before producing a chart, an average, a statistical model
-            or an analysis, there is usually a less visible step:
-            preparing the data.
+            Developed in Cameroon by Pierre Valdeze MBOM MBOM,
+            Hygie was born from a simple observation: before producing
+            a chart, an average or a statistical model, data must first
+            be prepared. This often neglected step can take a lot of time.
           </span>
 
         </p>
@@ -3979,20 +4059,17 @@ readr::write_excel_csv(
         <p>
 
           <span data-lang="fr">
-            Cette préparation peut consister à supprimer des doublons,
-            traiter des informations manquantes, modifier des variables,
-            réunir plusieurs fichiers ou réorganiser un tableau.
-            Hygie cherche à rendre ces opérations accessibles à travers
+            Hygie vise à rendre ces opérations accessibles à travers
             une interface graphique tout en restant connecté à
-            l'écosystème R.
+            l'écosystème R, pour que chacun puisse préparer ses
+            données de manière professionnelle et reproductible.
           </span>
 
           <span data-lang="en">
-            This preparation may involve removing duplicates,
-            handling missing information, modifying variables,
-            combining datasets or reshaping tables.
-            Hygie makes these operations accessible through a graphical
-            interface while remaining connected to the R ecosystem.
+            Hygie aims to make these operations accessible through
+            a graphical interface while remaining connected to the
+            R ecosystem, so that everyone can prepare their data
+            professionally and reproducibly.
           </span>
 
         </p>
@@ -4127,6 +4204,36 @@ readr::write_excel_csv(
 
               </tr>
 
+
+              <tr>
+
+                <th scope="row">
+
+                  <span data-lang="fr">
+                    Pays d'origine
+                  </span>
+
+                  <span data-lang="en">
+                    Country of origin
+                  </span>
+
+                </th>
+
+
+                <td>
+
+                  <span data-lang="fr">
+                    🇨🇲 Cameroun
+                  </span>
+
+                  <span data-lang="en">
+                    🇨🇲 Cameroon
+                  </span>
+
+                </td>
+
+              </tr>
+
             </tbody>
 
           </table>
@@ -4195,8 +4302,6 @@ readr::write_excel_csv(
 
           <div class="author-header">
 
-            <!-- PHOTO DE L'AUTEUR -->
-
             <div class="author-photo-section">
 
               <div class="author-photo-wrapper">
@@ -4242,8 +4347,6 @@ readr::write_excel_csv(
           </div>
 
 
-          <!-- PARCOURS -->
-
           <h2>
 
             <span data-lang="fr">
@@ -4259,7 +4362,7 @@ readr::write_excel_csv(
 
           <p data-lang="fr">
 
-            Je suis ingénieur agro-statisticien, avec un parcours
+            Je suis ingénieur agro-statisticien camerounais, avec un parcours
             construit à l'intersection de l'agriculture, de la statistique
             et de l'analyse des données.
 
@@ -4268,8 +4371,8 @@ readr::write_excel_csv(
 
           <p data-lang="en">
 
-            I am an agro-statistician engineer whose background sits
-            at the intersection of agriculture, statistics and data analysis.
+            I am a Cameroonian agro-statistician engineer whose background
+            sits at the intersection of agriculture, statistics and data analysis.
 
           </p>
 
@@ -4294,8 +4397,6 @@ readr::write_excel_csv(
 
           </p>
 
-
-          <!-- TRAVAIL -->
 
           <h2>
 
@@ -4334,9 +4435,7 @@ readr::write_excel_csv(
 
             Cette expérience m'a progressivement conduit à m'intéresser
             au développement d'outils permettant de rendre les méthodes
-            d'analyse plus accessibles. J'utilise notamment R, Python,
-            Excel et les technologies web pour construire des solutions
-            destinées à résoudre des problèmes concrets.
+            d'analyse plus accessibles, particulièrement en Afrique francophone.
 
           </p>
 
@@ -4344,14 +4443,11 @@ readr::write_excel_csv(
           <p data-lang="en">
 
             This experience gradually led me to develop tools that make
-            data analysis methods more accessible. I work with R, Python,
-            Excel and web technologies to build solutions for practical
-            problems.
+            data analysis methods more accessible, particularly in
+            French-speaking Africa.
 
           </p>
 
-
-          <!-- HYGIÉ -->
 
           <h2>
 
@@ -4404,8 +4500,6 @@ readr::write_excel_csv(
           </p>
 
 
-          <!-- PHILOSOPHIE -->
-
           <div class="author-highlight">
 
             <strong>
@@ -4440,8 +4534,6 @@ readr::write_excel_csv(
 
           </div>
 
-
-          <!-- LIENS -->
 
           <div class="author-links">
 
@@ -4525,7 +4617,7 @@ readr::write_excel_csv(
 
         <span data-lang="fr">
 
-          Hygie &copy; 2026 — Pierre Valdeze MBOM MBOM.
+          Hygie &copy; 2026 — Pierre Valdeze MBOM MBOM · Développé au Cameroun 🇨🇲
           Distribué sous licence MIT.
 
         </span>
@@ -4533,7 +4625,7 @@ readr::write_excel_csv(
 
         <span data-lang="en">
 
-          Hygie &copy; 2026 — Pierre Valdeze MBOM MBOM.
+          Hygie &copy; 2026 — Pierre Valdeze MBOM MBOM · Developed in Cameroon 🇨🇲
           Distributed under the MIT License.
 
         </span>
@@ -4828,6 +4920,93 @@ readr::write_excel_csv(
 
 
     /* ========================================================================
+       ANIMATION DES STATISTIQUES
+       ======================================================================== */
+
+    function animateStats() {
+      const statNumbers = document.querySelectorAll('.stat-number');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const startTime = performance.now();
+            
+            function updateNumber(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easedProgress = 1 - Math.pow(1 - progress, 3);
+              const currentValue = Math.round(target * easedProgress);
+              
+              element.textContent = currentValue;
+              
+              if (progress < 1) {
+                requestAnimationFrame(updateNumber);
+              }
+            }
+            
+            requestAnimationFrame(updateNumber);
+            observer.unobserve(element);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      statNumbers.forEach(stat => observer.observe(stat));
+    }
+
+
+    /* ========================================================================
+       FAQ ACCORDÉON
+       ======================================================================== */
+
+    function toggleFaq(btn) {
+      const faqItem = btn.closest('.faq-item');
+      
+      if (!faqItem) return;
+      
+      const isActive = faqItem.classList.contains('active');
+      
+      // Fermer tous les autres items
+      document.querySelectorAll('.faq-item.active').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Ouvrir ou fermer l'item cliqué
+      if (!isActive) {
+        faqItem.classList.add('active');
+      }
+    }
+
+
+    /* ========================================================================
+       NOTIFICATIONS TOAST
+       ======================================================================== */
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      
+      if (!container) return;
+      
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.textContent = message;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.add('show');
+      }, 100);
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+
+    /* ========================================================================
        COPIE DU CODE
        ======================================================================== */
 
@@ -4906,7 +5085,13 @@ readr::write_excel_csv(
 
         navigator.clipboard
           .writeText(text)
-          .then(showCopied)
+          .then(function() {
+            showCopied();
+            showToast(
+              currentLang === "en" ? "Code copied!" : "Code copié !",
+              "success"
+            );
+          })
           .catch(function() {
 
             fallbackCopy(text, showCopied);
@@ -5021,6 +5206,10 @@ readr::write_excel_csv(
 
         /* Barre de progression */
         initScrollProgress();
+
+
+        /* Animation des statistiques */
+        animateStats();
 
 
         /* Onglet */
