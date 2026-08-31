@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formation Hygie : apprendre à importer, inspecter, nettoyer, transformer et rendre ses préparations de données reproductibles avec R.">
+  <title>Formation Hygie — Préparer ses données avec R</title>
+  <style>
+    :root{--bg:#fcfcfc;--card:#fff;--text:#20242b;--muted:#5d6570;--primary:#1b365d;--border:#e1e5ea;--code:#f3f5f7;--max:920px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7}a{color:var(--primary)}.wrap{max-width:var(--max);margin:auto;padding:0 22px}.top{border-bottom:1px solid var(--border);padding:22px 0;background:#fff}.brand{font-family:Georgia,serif;font-size:1.35rem;font-weight:700;text-decoration:none;color:var(--primary)}.nav{float:right}.nav a{margin-left:16px;text-decoration:none;font-size:.9rem}.hero{padding:64px 0 38px}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;font-weight:700;color:var(--primary)}h1,h2,h3{font-family:Georgia,serif;color:var(--primary);line-height:1.25}h1{font-size:clamp(2rem,5vw,3.2rem);margin:.45rem 0 1rem}h2{font-size:1.75rem;margin-top:2.8rem;border-bottom:1px solid var(--border);padding-bottom:.5rem}h3{font-size:1.25rem;margin-top:1.8rem}.lead{font-size:1.15rem;color:var(--muted);max-width:760px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:24px 0}.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px}.card strong{display:block;color:var(--primary);margin-bottom:5px}.step{border-left:3px solid var(--primary);padding-left:20px;margin:28px 0}.code{background:var(--code);border:1px solid var(--border);border-radius:7px;padding:16px;overflow:auto;font:14px/1.55 Consolas,"SFMono-Regular",monospace}.note{background:#eef3f8;border-radius:7px;padding:16px 18px;margin:20px 0}.check{list-style:none;padding-left:0}.check li{margin:.45rem 0}.check li::before{content:'✓';font-weight:700;color:var(--primary);margin-right:.55rem}.cta{margin:42px 0;padding:26px;border:1px solid var(--border);border-radius:8px;background:#fff}.btn{display:inline-block;padding:9px 15px;border-radius:5px;background:var(--primary);color:#fff;text-decoration:none;font-weight:600;margin:6px 6px 0 0}.btn.alt{background:transparent;color:var(--primary);border:1px solid var(--primary)}footer{border-top:1px solid var(--border);margin-top:50px;padding:25px 0;color:var(--muted);font-size:.9rem}@media(max-width:650px){.nav{float:none;margin-top:10px}.nav a{margin:0 12px 0 0}.hero{padding-top:42px}}
+  </style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="index.html">Hygie</a><nav class="nav"><a href="index.html">Accueil</a><a href="index.html#guide">Guide</a><a href="index.html#formation">Cas pratiques</a><a href="https://github.com/census-specs/hygie">GitHub</a></nav></div></header>
+<main class="wrap">
+<section class="hero">
+  <div class="eyebrow">Formation libre · R · préparation des données</div>
+  <h1>Apprendre à préparer ses données avec Hygie</h1>
+  <p class="lead">Hygie n'a pas pour objectif de remplacer R. Il propose un chemin plus visuel pour comprendre les opérations de préparation des données, les appliquer étape par étape et retrouver le code R correspondant.</p>
+  <div class="grid">
+    <div class="card"><strong>Débutant en R</strong>Vous pouvez commencer par l'interface et apprendre progressivement le vocabulaire.</div>
+    <div class="card"><strong>Étudiant ou enseignant</strong>Utilisez Hygie pour visualiser concrètement les étapes d'un nettoyage de données.</div>
+    <div class="card"><strong>Analyste</strong>Utilisez-le pour accélérer la préparation tout en gardant une trace reproductible du travail.</div>
+  </div>
+</section>
+
+<section>
+<h2>1. Comprendre le problème avant de nettoyer</h2>
+<p>Une donnée « incorrecte » n'est pas toujours une donnée à supprimer. Une valeur manquante peut être légitime, un outlier peut correspondre à une observation réelle et un doublon peut être intentionnel. La première compétence est donc de <strong>diagnostiquer avant de modifier</strong>.</p>
+<div class="note"><strong>Principe :</strong> inspecter → comprendre → décider → transformer → vérifier.</div>
+</section>
+
+<section>
+<h2>2. Importer et découvrir un jeu de données</h2>
+<div class="step"><h3>Étape 1 — lancer Hygie</h3><p>Après installation du package, Hygie se lance simplement avec :</p><pre class="code">library(hygie)
+hygie()</pre></div>
+<div class="step"><h3>Étape 2 — importer</h3><p>Importez votre fichier depuis l'interface. Le but est d'abord de regarder la structure : nombre de lignes, variables, types et premières observations.</p></div>
+<div class="step"><h3>Étape 3 — poser quelques questions</h3><ul class="check"><li>Quelles variables sont numériques, textuelles, catégorielles ou temporelles ?</li><li>Où sont les valeurs manquantes ?</li><li>Existe-t-il des doublons ?</li><li>Les modalités sont-elles homogènes ?</li><li>Les valeurs extrêmes semblent-elles plausibles ?</li></ul></div>
+</section>
+
+<section>
+<h2>3. Inspecter la qualité des données</h2>
+<p>Hygie permet maintenant d'inspecter les problèmes directement depuis l'aperçu. Les badges associés aux variables signalent notamment les valeurs manquantes et les valeurs aberrantes, tandis que les doublons sont inspectables dans le tableau.</p>
+<div class="grid"><div class="card"><strong>Valeurs manquantes</strong>Repérer les lignes concernées avant de choisir une stratégie : conserver, supprimer ou imputer.</div><div class="card"><strong>Valeurs aberrantes</strong>Examiner leur position avec un boxplot avant de décider si elles sont réellement erronées.</div><div class="card"><strong>Doublons</strong>Revenir aux lignes concernées et vérifier leur signification avant suppression.</div></div>
+<p><strong>Attention :</strong> une détection statistique est une alerte, pas automatiquement une correction.</p>
+</section>
+
+<section>
+<h2>4. Transformer sans perdre la trace du travail</h2>
+<p>Chaque opération de préparation doit être comprise comme une étape du pipeline. Renommer une variable, recoder une modalité, convertir un type ou créer une variable ne sont pas des actions isolées : elles construisent progressivement un nouveau jeu de données.</p>
+<div class="step"><h3>Exemple</h3><p>Supposons une variable <code>sexe</code> contenant <code>F</code> et <code>M</code>. Après vérification des modalités, on peut la recoder en libellés plus explicites.</p><pre class="code">df[["sexe"]] &lt;- dplyr::recode(
+  as.character(df[["sexe"]]),
+  "F" = "Féminin",
+  "M" = "Masculin"
+)</pre></div>
+<p>Le principe important est que l'opération effectuée visuellement doit pouvoir être retrouvée dans le code généré par Hygie.</p>
+</section>
+
+<section>
+<h2>5. Comprendre les valeurs aberrantes avec le boxplot</h2>
+<p>Pour une variable numérique, Hygie utilise la règle classique de l'écart interquartile. Le boxplot permet de visualiser la distribution centrale et les observations qui s'en éloignent.</p>
+<pre class="code">Q1  = quantile(x, 0.25, na.rm = TRUE)
+Q3  = quantile(x, 0.75, na.rm = TRUE)
+IQR = Q3 - Q1
+
+borne_basse = Q1 - 1.5 * IQR
+borne_haute = Q3 + 1.5 * IQR</pre>
+<p>Une observation située au-delà de ces bornes est signalée comme potentiellement aberrante. Cela ne signifie pas qu'elle est fausse : il faut revenir à la ligne concernée et au contexte de collecte.</p>
+</section>
+
+<section>
+<h2>6. Sauvegarder un travail et le reprendre</h2>
+<p>Un nettoyage sérieux ne devrait pas disparaître à la fermeture de l'application. Hygie permet de sauvegarder un projet au format <code>.hygie</code>, avec les éléments nécessaires pour retrouver le travail effectué.</p>
+<div class="note"><strong>Bon réflexe :</strong> sauvegardez le projet dès que vous avez commencé un pipeline important, puis conservez aussi le script R généré avec vos autres documents d'analyse.</div>
+</section>
+
+<section>
+<h2>7. De Hygie vers R</h2>
+<p>La meilleure manière d'utiliser Hygie est de considérer l'interface comme un pont vers R. L'utilisateur peut commencer graphiquement, observer le code généré, le copier, le lire puis progressivement apprendre à le modifier.</p>
+<div class="grid"><div class="card"><strong>Je découvre</strong>Je travaille principalement avec l'interface.</div><div class="card"><strong>J'apprends</strong>Je compare chaque action à son code R.</div><div class="card"><strong>Je maîtrise</strong>Je reprends le script et poursuis mon analyse directement dans R.</div></div>
+</section>
+
+<section>
+<h2>Mini-parcours proposé</h2>
+<ol><li>Importer un fichier imparfait.</li><li>Examiner les types et la structure.</li><li>Identifier manquants, doublons et aberrantes.</li><li>Corriger une ou deux variables.</li><li>Vérifier le résultat après chaque étape.</li><li>Copier le script généré.</li><li>Sauvegarder le projet <code>.hygie</code>.</li><li>Ouvrir le script dans RStudio et comprendre chaque commande.</li></ol>
+</section>
+
+<div class="cta"><strong>Envie d'essayer ?</strong><p>Installez Hygie, chargez un petit jeu de données et commencez par l'inspection. Pour apprendre, choisissez volontairement un fichier imparfait : les problèmes deviennent alors des occasions de comprendre.</p><a class="btn" href="index.html">Retour au site</a><a class="btn alt" href="https://github.com/census-specs/hygie">Voir le code source</a></div>
+</main>
+<footer><div class="wrap">Hygie · Projet open-source · Développé au Cameroun · Licence MIT</div></footer>
+</body>
+</html>

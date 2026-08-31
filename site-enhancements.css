@@ -1,0 +1,138 @@
+/* Hygie — couche d'amélioration visuelle et responsive */
+
+/* Navigation desktop : ruban discret et lisible. */
+header.site-header{
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+nav.tab-nav{
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.tab-btn{
+  white-space:nowrap;
+}
+
+/* Actions de l'accueil : grille stable sur mobile. */
+.btn-group{
+  align-items:stretch;
+}
+
+.btn-group .btn{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+}
+
+.github-icon,
+.whatsapp-icon{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+}
+
+/* Cartes auteur plus respirantes sur petits écrans. */
+.author-profile{
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.author-links{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.author-links .btn{
+  width:100%;
+  min-width:0;
+}
+
+@media (max-width:760px){
+  .header-inner{
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    gap:.75rem;
+  }
+
+  .header-controls{
+    width:auto;
+    margin-left:auto;
+  }
+
+  /* Deux colonnes pour les quatre actions principales. */
+  .btn-group{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.65rem;
+    width:100%;
+  }
+
+  .btn-group .btn{
+    width:100%;
+    min-width:0;
+    min-height:48px;
+    padding:.65rem .55rem;
+    font-size:.82rem;
+    line-height:1.25;
+    text-align:center;
+  }
+
+  .btn-group .btn span{
+    overflow-wrap:anywhere;
+  }
+
+  /* Le ruban existant devient compact et reste exploitable au clavier. */
+  nav.tab-nav{
+    width:100%;
+    justify-content:flex-start;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+
+  nav.tab-nav::-webkit-scrollbar{display:none}
+
+  .tab-btn{
+    flex:0 0 auto;
+    min-height:42px;
+  }
+
+  .author-links{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.65rem;
+  }
+}
+
+@media (max-width:520px){
+  .site-container{
+    padding-left:1rem;
+    padding-right:1rem;
+  }
+
+  .brand-title{font-size:1.2rem}
+  .brand-badge{font-size:.68rem}
+
+  .btn-group .btn{
+    min-height:52px;
+    padding:.65rem .4rem;
+    font-size:.76rem;
+  }
+
+  .author-links{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}
