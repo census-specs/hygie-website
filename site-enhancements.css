@@ -1,0 +1,33 @@
+/* Hygie — améliorations de navigation et responsive */
+
+.site-nav-shell{width:100%;display:flex;align-items:center;justify-content:flex-end}
+.mobile-menu-toggle{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-card);color:var(--color-primary);cursor:pointer}
+.mobile-menu-toggle svg{width:20px;height:20px}
+.mobile-menu{display:none}
+
+/* Les actions principales restent lisibles sur petit écran. */
+@media (max-width:760px){
+  .btn-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;width:100%}
+  .btn-group .btn{width:100%;min-width:0;padding:.65rem .55rem;font-size:.82rem;text-align:center}
+  .btn-group .btn span{overflow-wrap:anywhere}
+  .header-inner{position:relative;display:flex;flex-direction:row;align-items:center;justify-content:space-between}
+  .header-controls{width:auto;margin-left:auto}
+  nav.tab-nav{display:none}
+  .mobile-menu-toggle{display:inline-flex}
+  .mobile-menu{position:absolute;left:0;right:0;top:100%;z-index:200;background:var(--bg-card);border:1px solid var(--border-color);border-top:0;box-shadow:0 10px 24px var(--shadow-color);padding:.5rem;display:none}
+  .mobile-menu.open{display:flex;flex-direction:column;gap:.25rem}
+  .mobile-menu .tab-btn{display:block;width:100%;flex:none;text-align:left;border:0;border-radius:5px;padding:.7rem .8rem;margin:0;background:transparent}
+  .mobile-menu .tab-btn.active{background:var(--code-bg);border:0;color:var(--color-primary)}
+  .mobile-menu .tab-btn.active::after{display:none}
+  .brand-title{font-size:1.2rem}
+  .brand-badge{font-size:.68rem}
+}
+
+@media (max-width:420px){
+  .site-container{padding-left:1rem;padding-right:1rem}
+  .btn-group{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .btn-group .btn{font-size:.76rem;padding:.62rem .4rem}
+  .header-controls{gap:.4rem}
+  .lang-switcher{font-size:.72rem}
+  .theme-toggle-btn{width:34px;height:34px}
+}
