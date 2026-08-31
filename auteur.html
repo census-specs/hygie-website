@@ -9,10 +9,17 @@
   <style>
     :root{--bg:#fcfcfc;--card:#fff;--text:#222;--muted:#5b6470;--primary:#1b365d;--border:#e1e5ea}
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7}
+    .site-nav{position:sticky;top:0;z-index:20;background:rgba(252,252,252,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .site-nav-inner{max-width:900px;margin:auto;min-height:58px;padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .site-brand{font-family:Georgia,serif;font-weight:700;font-size:1.3rem;color:var(--primary);text-decoration:none;white-space:nowrap}
+    .nav-links{display:flex;align-items:center;gap:.2rem;flex-wrap:wrap}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;padding:.42rem .62rem;border-radius:5px}
+    .nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--primary);background:#eef2f7}
+    .menu-toggle{display:none;border:1px solid var(--border);background:var(--card);color:var(--primary);width:40px;height:40px;border-radius:6px;cursor:pointer;font-size:1.35rem;line-height:1}
     .author-page{max-width:900px;margin:0 auto;padding:2.5rem 1.25rem 4rem}
-    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
-    .brand{font-family:Georgia,serif;font-weight:700;font-size:1.35rem;color:var(--primary);text-decoration:none}
+    .topbar{display:flex;justify-content:flex-start;align-items:center;margin-bottom:2rem}
     .back{color:var(--primary);text-decoration:none;font-size:.9rem}
     .hero{display:grid;grid-template-columns:180px 1fr;gap:2rem;align-items:center;padding-bottom:2rem;border-bottom:1px solid var(--border)}
     .portrait{width:180px;height:180px;object-fit:cover;border-radius:10px;border:1px solid var(--border)}
@@ -27,32 +34,53 @@
     .card p{margin:0;color:var(--muted)}
     .highlight{margin:2rem 0;padding:1.25rem 1.4rem;border-left:3px solid var(--primary);background:#f4f6f8;border-radius:0 7px 7px 0}
     .highlight p{margin:0;color:var(--muted)}
-    .links{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
+    .links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:1rem}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;min-height:44px;padding:.65rem 1rem;border-radius:6px;text-decoration:none;border:1px solid var(--border);color:var(--primary);background:var(--card);font-weight:600}
     .btn.primary{background:var(--primary);border-color:var(--primary);color:white}
-    svg{width:18px;height:18px}
+    svg{width:18px;height:18px;flex:0 0 auto}
     footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
-    @media(max-width:640px){
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    @media(max-width:700px){
+      .site-nav-inner{min-height:56px}
+      .menu-toggle{display:inline-flex;align-items:center;justify-content:center}
+      .nav-links{display:none;position:absolute;left:0;right:0;top:100%;background:var(--card);border-bottom:1px solid var(--border);padding:.5rem 1rem .75rem;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+      .nav-links.open{display:grid;grid-template-columns:1fr 1fr;gap:.2rem}
+      .nav-links a{padding:.65rem .7rem}
       .author-page{padding:1.25rem 1rem 3rem}
       .topbar{margin-bottom:1.5rem}
       .hero{grid-template-columns:1fr;gap:1.25rem}
       .portrait{width:130px;height:130px}
       h1{font-size:1.9rem}
       .grid{grid-template-columns:1fr}
-      .links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+      .links{grid-template-columns:repeat(2,minmax(0,1fr))}
       .links .btn{width:100%;padding:.6rem .45rem;font-size:.82rem}
+      .links .btn:last-child{grid-column:1 / -1}
     }
+    @media(max-width:380px){.nav-links.open{grid-template-columns:1fr}.links{grid-template-columns:1fr}.links .btn:last-child{grid-column:auto}}
   </style>
 </head>
 <body>
-  <main class="author-page">
-    <div class="topbar">
-      <a class="brand" href="index.html">Hygie</a>
-      <a class="back" href="index.html">← Retour au site</a>
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="index.html">Hygie</a>
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-menu">☰</button>
+      <nav class="nav-links" id="site-menu" aria-label="Navigation principale">
+        <a href="index.html#accueil">Accueil</a>
+        <a href="index.html#guide">Guide</a>
+        <a href="formation.html">Formation</a>
+        <a href="index.html#formation">Cas pratiques</a>
+        <a href="index.html#propos">À propos</a>
+        <a href="auteur.html" aria-current="page">Auteur</a>
+        <a href="https://github.com/census-specs/hygie" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
     </div>
+  </header>
+
+  <main class="author-page">
+    <div class="topbar"><a class="back" href="index.html#propos">← Retour à Hygie</a></div>
 
     <section class="hero">
-      <img class="portrait" src="Images/auteur.png" alt="Portrait de l'auteur de Hygie">
+      <img class="portrait" src="Images/auteur.png" alt="Portrait de Pierre Valdeze MBOM MBOM">
       <div>
         <h1>Pierre Valdeze MBOM MBOM</h1>
         <p class="role">Ingénieur agro-statisticien · Concepteur de Hygie</p>
@@ -66,9 +94,7 @@
       <p>Hygie est une réponse à ce besoin : une interface visuelle pour les personnes qui veulent travailler avec R, mais qui ne souhaitent pas commencer par mémoriser une longue série de commandes.</p>
     </section>
 
-    <div class="highlight">
-      <p><strong>La philosophie du projet :</strong> simplifier l'accès à R sans cacher R. Les actions réalisées dans l'interface doivent pouvoir être comprises, suivies et, lorsque c'est possible, reproduites sous forme de code.</p>
-    </div>
+    <div class="highlight"><p><strong>La philosophie du projet :</strong> simplifier l'accès à R sans cacher R. Les actions réalisées dans l'interface doivent pouvoir être comprises, suivies et, lorsque c'est possible, reproduites sous forme de code.</p></div>
 
     <section>
       <h2>Pourquoi Hygie ?</h2>
@@ -83,15 +109,29 @@
     <section>
       <h2>Suivre le projet</h2>
       <div class="links">
-        <a class="btn primary" href="https://github.com/census-specs/hygie" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.01c-3.2.7-3.87-1.35-3.87-1.35-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .96-.31 3.15 1.18a10.94 10.94 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.77.11 3.06.73.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.08.78 2.18v3.23c0 .3.2.66.79.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-          Code source
-        </a>
+        <a class="btn primary" href="https://github.com/census-specs/hygie" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.01c-3.2.7-3.87-1.35-3.87-1.35-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47-.11-3.06 0 0 .96-.31 3.15 1.18a10.94 10.94 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.77.11 3.06.73.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.08.78 3.23 0 .3.2.66.79.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>Code source</a>
         <a class="btn" href="https://wa.me/237698389030" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a class="btn" href="mailto:pierrembom@outlook.com">Email</a>
       </div>
     </section>
 
     <footer>Hygie — un projet ouvert autour de la préparation et de la qualité des données avec R.</footer>
   </main>
+  <script>
+    const menuButton=document.querySelector('.menu-toggle');
+    const menu=document.getElementById('site-menu');
+    if(menuButton&&menu){
+      menuButton.addEventListener('click',()=>{
+        const open=menu.classList.toggle('open');
+        menuButton.setAttribute('aria-expanded',String(open));
+        menuButton.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
+      });
+      menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+        menu.classList.remove('open');
+        menuButton.setAttribute('aria-expanded','false');
+        menuButton.setAttribute('aria-label','Ouvrir le menu');
+      }));
+    }
+  </script>
 </body>
 </html>
